@@ -50,6 +50,25 @@ class SesTemplateController {
     }).catch(err => response.send(500, err));
   }
 
+  async getTemplate({request, response}) {
+    const params = {
+      TemplateName: 'Test-Template-3' /* required */
+    };
+
+    await new Promise((resolve, reject) => {
+      ses.getTemplate(params, function (err, data) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(data);
+        }
+      });
+    }).then(data => {
+      response.status(200);
+      response.send({data: data});
+    }).catch(err => response.send(500, err));
+  }
+
   async updateTemplate({request, response}) {
     const params = {
       Template: { /* required */
