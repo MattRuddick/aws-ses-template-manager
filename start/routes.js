@@ -19,3 +19,6 @@ const Route = use('Route')
 Route.get('/', ({ view }) => {
   return view.render('index')
 });
+
+
+Route.get('get-templates', 'SesTemplateController.get');
