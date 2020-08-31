@@ -40,8 +40,10 @@ class SesTemplateController {
   }
 
   async listTemplates({request, response}) {
+    const requestParams = request.get();
+
     await new Promise((resolve, reject) => {
-      ses.listTemplates({MaxItems: '5'}, function (err, data) {
+      ses.listTemplates({MaxItems: (requestParams.MaxItems | 5)}, function (err, data) {
         if (err) {
           reject(err);
         } else {
