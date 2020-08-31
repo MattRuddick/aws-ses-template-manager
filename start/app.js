@@ -11,7 +11,7 @@
 |
 */
 const providers = [
-  '@adonisjs/framework/providers/AppProvider'
+  '@adonisjs/framework/providers/AppProvider', '@adonisjs/framework/providers/ViewProvider'
 ]
 
 /*
