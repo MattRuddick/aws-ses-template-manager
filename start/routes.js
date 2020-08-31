@@ -25,4 +25,4 @@ Route.get('list-templates', 'SesTemplateController.listTemplates');
 Route.get('get-template', 'SesTemplateController.getTemplate');
 Route.post('create-template', 'SesTemplateController.createTemplate');
 Route.put('update-template', 'SesTemplateController.updateTemplate');
-Route.delete('delete-template', 'SesTemplateController.deleteTemplate');
+Route.delete('delete-template/:TemplateName', 'SesTemplateController.deleteTemplate');

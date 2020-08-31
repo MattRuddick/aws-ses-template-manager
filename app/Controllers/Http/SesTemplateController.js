@@ -105,13 +105,18 @@ class SesTemplateController {
       });
     }).then(data => {
       response.send(200);
-    }).catch(err => response.send(500, err));
+    }).catch(err => {
+      response.status(500);
+      response.send(err);
+    });
   }
 
   async deleteTemplate({request, response}) {
+    const requestParams = request.params;
+
     await new Promise((resolve, reject) => {
       const params = {
-        TemplateName: 'Test-Template-3' /* required */
+        TemplateName: requestParams.TemplateName /* required */
       };
       ses.deleteTemplate(params, function(err, data) {
         if (err) {
@@ -121,7 +126,7 @@ class SesTemplateController {
         }
       });
     }).then(data => {
-      response.send(200, 'created');
+      response.send(200);
     }).catch(err => {
       response.status(500);
       response.send(err);
