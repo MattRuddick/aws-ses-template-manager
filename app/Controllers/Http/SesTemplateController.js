@@ -13,15 +13,16 @@ class SesTemplateController {
   }
 
   async createTemplate({request, response}) {
+    const requestBody = request.post();
+
     const params = {
       Template: {
-        TemplateName: 'Test-Template-3', /* required */
-        HtmlPart: '<html><head></head><body><h1>Test Content</h1></body></html>',
-        SubjectPart: 'Test SES Template',
-        TextPart: 'Test SES template preview content'
+        TemplateName: requestBody.TemplateName, /* required */
+        HtmlPart: requestBody.HtmlPart,
+        SubjectPart: requestBody.SubjectPart,
+        TextPart: requestBody.TextPart
       }
     };
-
 
     await new Promise((resolve, reject) => {
       //do async AWS createTemplate
@@ -32,7 +33,10 @@ class SesTemplateController {
           resolve(data);
         }
       });
-    }).then(response.send(200, 'Created')).catch(err => response.send(500, err));
+    }).then(response.send(200, 'Created')).catch(err => {
+      response.status(500);
+      response.send(err);
+    });
   }
 
   async listTemplates({request, response}) {
@@ -95,7 +99,7 @@ class SesTemplateController {
   async deleteTemplate({request, response}) {
     await new Promise((resolve, reject) => {
       const params = {
-        TemplateName: 'Test-Template-2' /* required */
+        TemplateName: 'Test-Template-3' /* required */
       };
       ses.deleteTemplate(params, function(err, data) {
         if (err) {
