@@ -33,29 +33,21 @@ class SesTemplateController {
         }
       });
     }).then(response.send(200, 'Created')).catch(err => response.send(500, err));
-
   }
 
-
-  listTemplates({request, response}) {
-    const params = {
-      MaxItems: '5',
-    };
-
-    const responseObj = {};
-
-    ses.listTemplates(params, function (err, data) {
-      if (err) {
-        responseObj.error = err;
-      } else {
-        responseObj.data = data;
-      }
-    });
-
-    const all = request.all();
-
-    response.status(200);
-    response.send(responseObj);
+  async listTemplates({request, response}) {
+    await new Promise((resolve, reject) => {
+      ses.listTemplates({MaxItems: '5'}, function (err, data) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(data);
+        }
+      });
+    }).then(data => {
+      response.status(200);
+      response.send({items: data});
+    }).catch(err => response.send(500, err));
   }
 }
 
