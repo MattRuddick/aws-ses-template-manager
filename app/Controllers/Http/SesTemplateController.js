@@ -49,6 +49,26 @@ class SesTemplateController {
       response.send({items: data});
     }).catch(err => response.send(500, err));
   }
+
+  async deleteTemplate({request, response}) {
+    await new Promise((resolve, reject) => {
+      const params = {
+        TemplateName: 'Test-Template-2' /* required */
+      };
+      ses.deleteTemplate(params, function(err, data) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    }).then(data => {
+      response.send(200, 'created');
+    }).catch(err => {
+      response.status(500);
+      response.send(err);
+    });
+  }
 }
 
 module.exports = SesTemplateController
