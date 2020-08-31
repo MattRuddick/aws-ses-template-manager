@@ -22,5 +22,6 @@ Route.get('/', ({ view }) => {
 
 
 Route.get('list-templates', 'SesTemplateController.listTemplates');
-Route.get('list-templates', 'SesTemplateController.listTemplates');
+Route.post('create-template', 'SesTemplateController.createTemplate');
+Route.put('update-template', 'SesTemplateController.updateTemplate');
 Route.delete('delete-template', 'SesTemplateController.deleteTemplate');

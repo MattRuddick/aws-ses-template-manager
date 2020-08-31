@@ -50,6 +50,29 @@ class SesTemplateController {
     }).catch(err => response.send(500, err));
   }
 
+  async updateTemplate({request, response}) {
+    const params = {
+      Template: { /* required */
+        TemplateName: 'Test-Template-3', /* required */
+        HtmlPart: '<html><head></head><body><h1>Test Content (Updated)</h1></body></html>',
+        SubjectPart: 'Test SES Template (Updated)',
+        TextPart: 'Test SES template preview content (updated)'
+      }
+    };
+
+    await new Promise((resolve, reject) => {
+      ses.updateTemplate(params, function(err, data) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    }).then(data => {
+      response.send(200);
+    }).catch(err => response.send(500, err));
+  }
+
   async deleteTemplate({request, response}) {
     await new Promise((resolve, reject) => {
       const params = {
