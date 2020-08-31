@@ -53,12 +53,17 @@ class SesTemplateController {
     }).then(data => {
       response.status(200);
       response.send({items: data});
-    }).catch(err => response.send(500, err));
+    }).catch(err => {
+      response.status(500);
+      response.send(err)
+    });
   }
 
   async getTemplate({request, response}) {
+    const requestParams = request.get();
+
     const params = {
-      TemplateName: 'Test-Template-3' /* required */
+      TemplateName: requestParams.TemplateName
     };
 
     await new Promise((resolve, reject) => {
@@ -72,7 +77,10 @@ class SesTemplateController {
     }).then(data => {
       response.status(200);
       response.send({data: data});
-    }).catch(err => response.send(500, err));
+    }).catch(err => {
+      response.status(500);
+      response.send(err);
+    });
   }
 
   async updateTemplate({request, response}) {
