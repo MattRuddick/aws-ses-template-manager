@@ -21,4 +21,4 @@ Route.get('/', ({ view }) => {
 });
 
 
-Route.get('get-templates', 'SesTemplateController.get');
+Route.get('list-templates', 'SesTemplateController.listTemplates');
