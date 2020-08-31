@@ -22,3 +22,4 @@ Route.get('/', ({ view }) => {
 
 
 Route.get('list-templates', 'SesTemplateController.listTemplates');
+Route.post('create-template', 'SesTemplateController.createTemplate');
