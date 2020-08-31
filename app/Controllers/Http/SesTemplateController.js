@@ -84,12 +84,14 @@ class SesTemplateController {
   }
 
   async updateTemplate({request, response}) {
+    const requestBody = request.post();
+
     const params = {
-      Template: { /* required */
-        TemplateName: 'Test-Template-3', /* required */
-        HtmlPart: '<html><head></head><body><h1>Test Content (Updated)</h1></body></html>',
-        SubjectPart: 'Test SES Template (Updated)',
-        TextPart: 'Test SES template preview content (updated)'
+      Template: {
+        TemplateName: requestBody.TemplateName, /* required */
+        HtmlPart: requestBody.HtmlPart,
+        SubjectPart: requestBody.SubjectPart,
+        TextPart: requestBody.TextPart
       }
     };
 
