@@ -50,7 +50,13 @@
   <div class="container">
     <div class="col mt-5">
 
-      <div class="d-none" id="noTemplatesPlaceholder">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page"><a href="#">SES Templates</a></li>
+        </ol>
+      </nav>
+
+      <div style="display:none;" id="noTemplatesPlaceholder">
         <p>You have no templates</p>
       </div>
 
@@ -85,10 +91,15 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-          <button type="button" class="btn btn-primary" onclick="deleteTemplate('')">Delete</button>
+          <button type="button" class="btn btn-primary" data-action-name="" onclick="deleteTemplate($(this).attr('data-action-name'))" id="deleteTemplateCta">Delete</button>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- delete template alert -->
+  <div class="alert alert-success fade" style="display:none; position: absolute; bottom: 10px; left: 0; right:0; margin: auto;" role="alert">
+    Template successfully deleted.
   </div>
   </body>
 </html>
