@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
-    <script src="/index.js"></script>
+    <script src="/create-template.js"></script>
   </head>
 
   <body>
@@ -49,59 +49,38 @@
 
   <div class="container">
     <div class="col mt-5">
-
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item active" aria-current="page"><a href="#">SES Templates</a></li>
+          <li class="breadcrumb-item"><a href="/">SES Templates</a></li>
+          <li class="breadcrumb-item active" aria-current="page">create template</li>
         </ol>
       </nav>
 
-      <div style="display:none;" id="noTemplatesPlaceholder">
-        <p>You have no templates</p>
-      </div>
-
-      <a href="/create-template" class="btn btn-secondary my-2 float-right">Create New</a>
-
-      <table class="table table-striped" id="templateListTable" style="display:none;">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Created Timestamp</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-
-  <!-- delete template modal -->
-  <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+      <form onsubmit="createTemplate()">
+        <div class="form-group">
+          <label for="templateName">Template Name</label>
+          <input type="text" class="form-control" id="templateName" aria-describedby="emailHelp" placeholder="Template Name">
         </div>
-        <div class="modal-body">
-          Deleting a SES template is a non reversible action
+        <div class="form-group">
+          <label for="templateSubject">Subject</label>
+          <input type="text" class="form-control" id="templateSubject" placeholder="Subject">
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-          <button type="button" class="btn btn-primary" data-action-name="" onclick="deleteTemplate($(this).attr('data-action-name'))" id="deleteTemplateCta">Delete</button>
+        <div class="form-group">
+          <label for="templateText">Text</label>
+          <input type="text" class="form-control" id="templateText" placeholder="Text">
         </div>
-      </div>
+        <div class="form-group">
+          <label for="templateHtml">Html</label>
+          <textarea class="form-control" id="templateHtml" placeholder="Html" rows="5"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </form>
     </div>
   </div>
 
   <!-- delete template alert -->
   <div class="alert alert-success fade" style="display:none; position: absolute; bottom: 10px; left: 0; right:0; margin: auto;" role="alert">
-    Template successfully deleted.
+    Template successfully created.
   </div>
   </body>
 </html>

@@ -24,6 +24,10 @@ Route.get('/update-template', ({ view }) => {
   return view.render('update-template')
 });
 
+Route.get('/create-template', ({ view }) => {
+  return view.render('create-template')
+});
+
 Route.get('list-templates', 'SesTemplateController.listTemplates');
 Route.get('get-template/:TemplateName', 'SesTemplateController.getTemplate');
 Route.post('create-template', 'SesTemplateController.createTemplate');
