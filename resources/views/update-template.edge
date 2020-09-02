@@ -56,11 +56,11 @@
         </ol>
       </nav>
 
-      <form>
+      <form onsubmit="updateTemplate()">
         <div class="form-group">
           <label for="exampleInputEmail1">Template Name</label>
-          <input type="email" class="form-control" id="templateName" aria-describedby="emailHelp" placeholder="Enter email">
-          <small id="emailHelp" class="form-text text-muted">This cannot be changed when editing this template.</small>
+          <input type="email" class="form-control" id="templateName" aria-describedby="emailHelp" placeholder="Enter email" disabled>
+          <small id="emailHelp" class="form-text text-muted">This value cannot be changed when editing this template</small>
         </div>
         <div class="form-group">
           <label for="templateSubject">Subject</label>

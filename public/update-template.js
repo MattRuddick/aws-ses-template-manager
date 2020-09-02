@@ -12,5 +12,23 @@ $(document).ready(() => {
     $('#templateText').val(response.data.TextPart);
     $('#templateHtml').val(response.data.HtmlPart);
   });
-})
+});
+
+function updateTemplate(formData) {
+  const putPayload = {
+    "TemplateName": $('#templateName').val(),
+    "HtmlPart": $('#templateHtml').val(),
+    "SubjectPart": $('#templateSubject').val(),
+    "TextPart": $('#templateText').val()
+  };
+
+  $.ajax({
+    url: `/update-template`,
+    type: 'PUT',
+    data: putPayload,
+    success: function() {
+      window.location.href = '/';
+    }
+  });
+}
 
