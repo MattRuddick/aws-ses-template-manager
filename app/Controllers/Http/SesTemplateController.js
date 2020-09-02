@@ -60,7 +60,7 @@ class SesTemplateController {
   }
 
   async getTemplate({request, response}) {
-    const requestParams = request.get();
+    const requestParams = request.params;
 
     const params = {
       TemplateName: requestParams.TemplateName
@@ -76,7 +76,7 @@ class SesTemplateController {
       });
     }).then(data => {
       response.status(200);
-      response.send({data: data});
+      response.send({data: data.Template});
     }).catch(err => {
       response.status(500);
       response.send(err);
