@@ -12,9 +12,17 @@ $(document).ready(function(){
       type: "POST",
       url: "/create-template",
       data: createPayload,
-      dataType: 'application/json',
       success: function() {
         window.location.href = '/';
+      },
+      error: function(xhr) {
+        let content;
+        if (xhr.responseJSON.message) {
+          content = xhr.responseJSON.message;
+        } else {
+          content = "Error saving template. Please try again";
+        }
+        $('#errContainer').html(content).removeClass('d-none');
       }
     });
   });
