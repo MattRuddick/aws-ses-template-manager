@@ -48,33 +48,47 @@
   </header>
 
   <div class="container">
-    <div class="col mt-5">
-
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item active" aria-current="page"><a href="#">SES Templates</a></li>
-        </ol>
-      </nav>
-
-      <div style="display:none;" id="noTemplatesPlaceholder">
-        <p>You have no templates</p>
+      <div class="row pt-3">
+        <nav aria-label="breadcrumb" class="col">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><a href="#">SES Templates</a></li>
+          </ol>
+        </nav>
       </div>
 
-      <a href="/create-template" class="btn btn-secondary my-2 float-right">Create New</a>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="inputState">Region</label>
+            <select id="inputState" class="form-control">
+              <option selected>us-east-1</option>
+            </select>
+          </div>
+        </div>
 
-      <table class="table table-striped" id="templateListTable" style="display:none;">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Created Timestamp</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
+        <div class="col text-right">
+          <a href="/create-template" class="btn btn-primary my-2">Create New</a>
+        </div>
+      </div>
 
-        </tbody>
-      </table>
-    </div>
+      <div style="display:none;" id="noTemplatesPlaceholder" class="row">
+              <p>You have no templates</p>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <table class="table table-striped" id="templateListTable" style="display:none;">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Created Timestamp</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          </div>
+        </div>
   </div>
 
 

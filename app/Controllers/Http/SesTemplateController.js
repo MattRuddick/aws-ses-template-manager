@@ -2,7 +2,7 @@
 const Env = use('Env');
 const AWS = require('aws-sdk');
 AWS.config.update({region: 'us-east-1'});
-let ses = new AWS.SES();  //allow this to be re-assigned if we change region from the FE
+const ses = new AWS.SES();  //allow this to be re-assigned if we change region from the FE
 
 class SesTemplateController {
 
