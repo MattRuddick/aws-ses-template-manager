@@ -6,7 +6,7 @@ $(document).ready(() => {
     window.location.href = '/'; //something went wrong
   }
 
-  $.get(`/get-template/${templateName}`, function (response) {
+  $.get(`/get-template/${templateName}?region=${localStorage.getItem('region')}`, function (response) {
     $('#templateName').val(response.data.TemplateName);
     $('#templateSubject').val(response.data.SubjectPart);
     $('#templateText').val(response.data.TextPart);
@@ -21,7 +21,8 @@ $(document).ready(() => {
       "TemplateName": $('#templateName').val(),
       "HtmlPart": $('#templateHtml').val(),
       "SubjectPart": $('#templateSubject').val(),
-      "TextPart": $('#templateText').val()
+      "TextPart": $('#templateText').val(),
+      "region": localStorage.getItem('region')
     };
 
     $.ajax({

@@ -1,19 +1,14 @@
 'use strict'
 const Env = use('Env');
 const AWS = require('aws-sdk');
-AWS.config.update({region: 'us-east-1'});
-const ses = new AWS.SES();  //allow this to be re-assigned if we change region from the FE
 
 class SesTemplateController {
 
-  changeRegion({request, response}) {
-    //Allow changing of AWS region
-    /*var credentials = new AWS.SharedIniFileCredentials({profile: });
-    AWS.config.credentials = credentials;*/
-  }
-
   async createTemplate({request, response}) {
     const requestBody = request.post();
+
+    AWS.config.update({region: requestBody.region});
+    const ses = new AWS.SES();
 
     const params = {
       Template: {
@@ -42,8 +37,11 @@ class SesTemplateController {
   async listTemplates({request, response}) {
     const requestParams = request.get();
 
+    AWS.config.update({region: requestParams.region});
+    const ses = new AWS.SES();
+
     await new Promise((resolve, reject) => {
-      ses.listTemplates({MaxItems: (requestParams.MaxItems | 5)}, function (err, data) {
+      ses.listTemplates({MaxItems: (requestParams.MaxItems | 10)}, function (err, data) {
         if (err) {
           reject(err);
         } else {
@@ -61,6 +59,10 @@ class SesTemplateController {
 
   async getTemplate({request, response}) {
     const requestParams = request.params;
+    const requestQueryParams = request.get();
+
+    AWS.config.update({region: requestQueryParams.region});
+    const ses = new AWS.SES();
 
     const params = {
       TemplateName: requestParams.TemplateName
@@ -85,6 +87,9 @@ class SesTemplateController {
 
   async updateTemplate({request, response}) {
     const requestBody = request.post();
+
+    AWS.config.update({region: requestBody.region});
+    const ses = new AWS.SES();
 
     const params = {
       Template: {
@@ -113,6 +118,10 @@ class SesTemplateController {
 
   async deleteTemplate({request, response}) {
     const requestParams = request.params;
+    const requestQueryParams = request.get();
+
+    AWS.config.update({region: requestQueryParams.region});
+    const ses = new AWS.SES();
 
     await new Promise((resolve, reject) => {
       const params = {

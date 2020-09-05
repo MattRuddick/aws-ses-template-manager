@@ -5,7 +5,8 @@ $(document).ready(function(){
       "TemplateName": $('#templateName').val(),
       "HtmlPart": $('#templateHtml').val(),
       "SubjectPart": $('#templateSubject').val(),
-      "TextPart": $('#templateText').val()
+      "TextPart": $('#templateText').val(),
+      "region": localStorage.getItem('region')
     };
 
     $.ajax({

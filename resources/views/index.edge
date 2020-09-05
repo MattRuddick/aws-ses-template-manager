@@ -59,9 +59,11 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <label for="inputState">Region</label>
-            <select id="inputState" class="form-control">
-              <option selected>us-east-1</option>
+            <label for="regionSelector">Region</label>
+            <select id="regionSelector" class="form-control">
+              <option>us-east-1</option>
+              <option>us-east-2</option>
+              <option>us-west-2</option>
             </select>
           </div>
         </div>
@@ -72,7 +74,9 @@
       </div>
 
       <div style="display:none;" id="noTemplatesPlaceholder" class="row">
-              <p>You have no templates</p>
+        <div class="col">
+          <p>You have no templates</p>
+        </div>
       </div>
 
       <div class="row">
