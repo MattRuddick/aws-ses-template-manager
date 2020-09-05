@@ -51,11 +51,11 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/">SES Templates</a></li>
-          <li class="breadcrumb-item active" aria-current="page">update template</li>
+          <li class="breadcrumb-item active" aria-current="page">Update Template</li>
         </ol>
       </nav>
 
-      <form id="updateTemplate()">
+      <form id="updateTemplateForm" class="d-none">
         <div class="form-group">
           <label for="templateName">Template Name</label>
           <input type="text" class="form-control" id="templateName" placeholder="Template Name" disabled>
@@ -73,6 +73,7 @@
           <label for="templateHtml">Html</label>
           <textarea class="form-control" id="templateHtml" placeholder="Html" rows="5"></textarea>
         </div>
+        <div id="errContainer" class="text-danger mb-2 d-none"></div>
         <button type="submit" class="btn btn-primary">Update</button>
       </form>
     </div>

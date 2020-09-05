@@ -11,24 +11,36 @@ $(document).ready(() => {
     $('#templateSubject').val(response.data.SubjectPart);
     $('#templateText').val(response.data.TextPart);
     $('#templateHtml').val(response.data.HtmlPart);
+    $('#updateTemplateForm').removeClass('d-none'); //show the form only when we have pre-populated all inputs
+  });
+
+
+  $('#updateTemplateForm').submit(function(e){
+    e.preventDefault();
+    const putPayload = {
+      "TemplateName": $('#templateName').val(),
+      "HtmlPart": $('#templateHtml').val(),
+      "SubjectPart": $('#templateSubject').val(),
+      "TextPart": $('#templateText').val()
+    };
+
+    $.ajax({
+      url: `/update-template`,
+      type: 'PUT',
+      data: putPayload,
+      success: function() {
+        window.location.href = '/';
+      },
+      error: function(xhr) {
+        let content;
+        if (xhr.responseJSON.message) {
+          content = xhr.responseJSON.message;
+        } else {
+          content = "Error updating template. Please try again";
+        }
+        $('#errContainer').html(content).removeClass('d-none');
+      }
+    });
   });
 });
-
-function updateTemplate(formData) {
-  const putPayload = {
-    "TemplateName": $('#templateName').val(),
-    "HtmlPart": $('#templateHtml').val(),
-    "SubjectPart": $('#templateSubject').val(),
-    "TextPart": $('#templateText').val()
-  };
-
-  $.ajax({
-    url: `/update-template`,
-    type: 'PUT',
-    data: putPayload,
-    success: function() {
-      window.location.href = '/';
-    }
-  });
-}
 
