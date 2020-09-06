@@ -12,8 +12,8 @@
     "adonisjs",
     "adonis-app"
   ],
-  "author": "",
-  "license": "UNLICENSED",
+  "author": "https://github.com/MattRuddick",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@adonisjs/ace": "^5.0.8",
