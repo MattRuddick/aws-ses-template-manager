@@ -2,8 +2,8 @@
 
 ## Motivation
 AWS currently only allows CRUD actions on SES templates via the command line. Performing these actions especially for multiple templates 
- can be time consuming and in some cases inefficient. A simple GUI allowing the user to quickly perform these actions without need to 
- run multiple CLI commands can be more efficient.
+ can be time consuming and in some cases inefficient depending the volumes of templates your managing. A simple GUI application allowing the user to quickly perform these actions without need to 
+ run multiple CLI commands can be more efficient in some cases.
 
 ## Screenshots
 Review templates:
