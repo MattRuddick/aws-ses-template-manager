@@ -1,9 +1,41 @@
-# Adonis Slim App
+# AWS SES Template Manager GUI
 
-The Adonis slim app is the tinest boilerplate to create Adonisjs applications with minimal footprint and you get all the goodies of Adonis IoC container, autoloading, ace commands etc.
+## Motivation
+AWS currently only allows CRUD actions on SES templates via the command line. Performing these actions especially for multiple templates 
+ can be time consuming and in some cases inefficient. A simple GUI allowing the user to quickly perform these actions without need to 
+ run multiple CLI commands can be more efficient.
 
-## What's next?
+## Screenshots
+Review templates:
 
-This project structure can scale as you go, simply execute the `ace` commands to create **Controllers**, **Models**, etc for you. 
+![review templates screenshot](./resources/img/templates-review-screenshot.png)
 
-Also make sure to read the [guides](http://dev.adonisjs.com/docs/4.0/installation)
+Create template:
+
+![review templates screenshot](./resources/img/create-template-screenshot.png)
+
+## Tech / framework used
+
+- AdonisJS
+- Bootstrap 4
+
+## Features
+Create, Retrieve, Update and Delete AWS SES templates from any region via one simple GUI.
+
+## Installation
+- Ensure to have [setup your AWS credentials](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html) on your machine.
+- git clone this project repo.
+- ```npm install```
+- ```adonis serve --dev```
+## How to use
+Once installation steps have been followed, navigate to http://127.0.0.1:3333 (default port, this can be changed if required).
+
+The index page will show a table of existing SES templates in your selected region for the AWS profile named 'default'. You can further go ahead and either delete 
+or edit an SES template from this same table.
+
+## Contribute
+
+Pull requests are very much welcomed.
+
+## License
+MIT @ [Matthew Ruddick](https://github.com/MattRuddick)
