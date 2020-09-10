@@ -41,7 +41,7 @@ class SesTemplateController {
     const ses = new AWS.SES();
 
     await new Promise((resolve, reject) => {
-      ses.listTemplates({MaxItems: (requestParams.MaxItems | 10)}, function (err, data) {
+      ses.listTemplates({MaxItems: (requestParams.MaxItems | 500)}, function (err, data) {
         if (err) {
           reject(err);
         } else {
