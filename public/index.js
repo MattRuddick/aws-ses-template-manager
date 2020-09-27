@@ -46,6 +46,9 @@ $(document).ready(() => {
 
     $('#templateListTable tbody').append(tableContent);
     $('#templateListTable').show();
+  }).fail(function (response) {
+    $('#credentialsErrorModal .modal-body').append(`<p><strong>${response.responseJSON.code}</strong> <br> ${response.responseJSON.message} </p>`);
+    $('#credentialsErrorModal').modal();
   });
 });
 

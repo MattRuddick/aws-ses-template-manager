@@ -1,6 +1,8 @@
 'use strict'
 const Env = use('Env');
 const AWS = require('aws-sdk');
+const credentials = new AWS.SharedIniFileCredentials({profile: Env.get('AWS_PROFILE_NAME', 'default')});
+AWS.config.credentials = credentials;
 
 class SesTemplateController {
 
@@ -41,7 +43,7 @@ class SesTemplateController {
     const ses = new AWS.SES();
 
     await new Promise((resolve, reject) => {
-      ses.listTemplates({MaxItems: (requestParams.MaxItems | 500)}, function (err, data) {
+      ses.listTemplates({MaxItems: requestParams.MaxItems || 5000}, function (err, data) {
         if (err) {
           reject(err);
         } else {
