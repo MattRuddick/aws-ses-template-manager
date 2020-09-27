@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="/create-template.js"></script>
+    <title>SES Template Manager - Create Template</title>
   </head>
 
   <body>
@@ -59,18 +60,22 @@
           <div class="form-group">
             <label for="templateName">Template Name</label>
             <input type="text" class="form-control" id="templateName" aria-describedby="emailHelp" placeholder="Template Name">
+            <small class="form-text text-muted">The name of the template. When you send the email, you refer to this name.</small>
           </div>
           <div class="form-group">
             <label for="templateSubject">Subject</label>
             <input type="text" class="form-control" id="templateSubject" placeholder="Subject">
+            <small class="form-text text-muted">The subject line of the email. This property may contain replacement tags.</small>
           </div>
           <div class="form-group">
             <label for="templateText">Text</label>
             <input type="text" class="form-control" id="templateText" placeholder="Text">
+            <small class="form-text text-muted">The text body of the email. Recipients whose email clients don't display HTML email see this version of the email. This property may contain replacement tags.</small>
           </div>
           <div class="form-group">
             <label for="templateHtml">Html</label>
             <textarea class="form-control" id="templateHtml" placeholder="Html" rows="5"></textarea>
+            <small class="form-text text-muted">The HTML body of the email. This property may contain replacement tags.</small>
           </div>
           <div id="errContainer" class="text-danger mb-2 d-none"></div>
           <button type="submit" class="btn btn-primary">Create</button>

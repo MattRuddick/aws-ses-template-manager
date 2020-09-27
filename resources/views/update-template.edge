@@ -5,85 +5,89 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="/update-template.js"></script>
+    <title>SES Template Manager - Update Template</title>
   </head>
 
   <body>
-
-  <header>
-    <div class="bg-dark collapse" id="navbarHeader">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-8 col-md-7 py-4">
-            <h4 class="text-white">About</h4>
-            <p class="text-muted">
-              A simple application offering a way to create, retrieve, update and delete AWS SES templates via one simple GUI rather than via CLI.
-            </p>
-          </div>
-          <div class="col-sm-4 offset-md-1 py-4 text-right">
-            <h4 class="text-white">Contact</h4>
-            <ul class="list-unstyled">
-              <li><a href="https://github.com/MattRuddick" class="text-white">Github</a></li>
-            </ul>
+    <header>
+      <div class="bg-dark collapse" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">About</h4>
+              <p class="text-muted">
+                A simple application offering a way to create, retrieve, update and delete AWS SES templates via one simple GUI rather than via CLI.
+              </p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4 text-right">
+              <h4 class="text-white">Contact</h4>
+              <ul class="list-unstyled">
+                <li><a href="https://github.com/MattRuddick" class="text-white">Github</a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="navbar navbar-dark bg-dark shadow-sm">
-      <div class="container d-flex justify-content-between">
-        <a href="#" class="navbar-brand d-flex align-items-center">
-        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-open-fill mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8.941.435a2 2 0 0 0-1.882 0l-6 3.2A2 2 0 0 0 0 5.4v.313l6.709 3.933L8 8.928l1.291.717L16 5.715V5.4a2 2 0 0 0-1.059-1.765l-6-3.2zM16 6.873l-5.693 3.337L16 13.372v-6.5zm-.059 7.611L8 10.072.059 14.484A2 2 0 0 0 2 16h12a2 2 0 0 0 1.941-1.516zM0 13.373l5.693-3.163L0 6.873v6.5z"/>
-        </svg>
-        <strong>SES Template Manager</strong>
-        </a>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-open-fill mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.941.435a2 2 0 0 0-1.882 0l-6 3.2A2 2 0 0 0 0 5.4v.313l6.709 3.933L8 8.928l1.291.717L16 5.715V5.4a2 2 0 0 0-1.059-1.765l-6-3.2zM16 6.873l-5.693 3.337L16 13.372v-6.5zm-.059 7.611L8 10.072.059 14.484A2 2 0 0 0 2 16h12a2 2 0 0 0 1.941-1.516zM0 13.373l5.693-3.163L0 6.873v6.5z"/>
+          </svg>
+          <strong>SES Template Manager</strong>
+          </a>
+          <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="row pt-3">
+        <nav aria-label="breadcrumb" class="col">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">SES Templates</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Update Template</li>
+          </ol>
+        </nav>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <form id="updateTemplateForm" class="d-none">
+            <div class="form-group">
+              <label for="templateName">Template Name</label>
+              <small class="form-text text-muted float-right">This value cannot be changed when editing this template</small>
+              <input type="text" class="form-control" id="templateName" placeholder="Template Name" disabled>
+              <small class="form-text text-muted">The name of the template. When you send the email, you refer to this name.</small>
+            </div>
+            <div class="form-group">
+              <label for="templateSubject">Subject</label>
+              <input type="text" class="form-control" id="templateSubject" placeholder="Subject">
+              <small class="form-text text-muted">The subject line of the email. This property may contain replacement tags.</small>
+            </div>
+            <div class="form-group">
+              <label for="templateText">Text</label>
+              <input type="text" class="form-control" id="templateText" placeholder="Text">
+              <small class="form-text text-muted">The text body of the email. Recipients whose email clients don't display HTML email see this version of the email. This property may contain replacement tags.</small>
+            </div>
+            <div class="form-group">
+              <label for="templateHtml">Html</label>
+              <textarea class="form-control" id="templateHtml" placeholder="Html" rows="5"></textarea>
+              <small class="form-text text-muted">The HTML body of the email. This property may contain replacement tags.</small>
+            </div>
+            <div id="errContainer" class="text-danger mb-2 d-none"></div>
+            <a href="/" class="btn btn-secondary">Back</a>
+            <button type="submit" class="btn btn-primary">Update</button>
+          </form>
+        </div>
       </div>
     </div>
-  </header>
 
-  <div class="container">
-    <div class="row pt-3">
-      <nav aria-label="breadcrumb" class="col">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">SES Templates</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Update Template</li>
-        </ol>
-      </nav>
+    <!-- delete template alert -->
+    <div class="alert alert-success fade" style="display:none; position: absolute; bottom: 10px; left: 0; right:0; margin: auto;" role="alert">
+      Template successfully deleted.
     </div>
-
-    <div class="row">
-      <div class="col">
-        <form id="updateTemplateForm" class="d-none">
-          <div class="form-group">
-            <label for="templateName">Template Name</label>
-            <input type="text" class="form-control" id="templateName" placeholder="Template Name" disabled>
-            <small id="emailHelp" class="form-text text-muted">This value cannot be changed when editing this template</small>
-          </div>
-          <div class="form-group">
-            <label for="templateSubject">Subject</label>
-            <input type="text" class="form-control" id="templateSubject" placeholder="Subject">
-          </div>
-          <div class="form-group">
-            <label for="templateText">Text</label>
-            <input type="text" class="form-control" id="templateText" placeholder="Text">
-          </div>
-          <div class="form-group">
-            <label for="templateHtml">Html</label>
-            <textarea class="form-control" id="templateHtml" placeholder="Html" rows="5"></textarea>
-          </div>
-          <div id="errContainer" class="text-danger mb-2 d-none"></div>
-          <a href="/" class="btn btn-secondary">Back</a>
-          <button type="submit" class="btn btn-primary">Update</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- delete template alert -->
-  <div class="alert alert-success fade" style="display:none; position: absolute; bottom: 10px; left: 0; right:0; margin: auto;" role="alert">
-    Template successfully deleted.
-  </div>
   </body>
 </html>
