@@ -26,6 +26,7 @@ Create, Retrieve, Update and Delete AWS SES templates from any region via one si
 - Ensure to have [setup your AWS credentials](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html) on your machine.
 - git clone this project repo.
 - ```npm install```
+- Ensure 'AWS_PROFILE_NAME' within the .env file is set to your desired aws named profile.
 - ```adonis serve --dev```
 ## How to use
 Once installation steps have been followed, navigate to http://127.0.0.1:3333 (default port, this can be changed if required).
