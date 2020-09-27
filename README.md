@@ -29,7 +29,7 @@ Create, Retrieve, Update and Delete AWS SES templates from any region via one si
 - Ensure 'AWS_PROFILE_NAME' within the .env file is set to your desired aws named profile.
 - ```adonis serve --dev```
 ## How to use
-Once installation steps have been followed, navigate to http://127.0.0.1:3333 (default port, this can be changed if required).
+Once installation steps have been followed, navigate to http://127.0.0.1:3333 (host and port can be changed via the .env file if required).
 
 The index page will show a table of existing SES templates in your selected region for the AWS profile named 'default'. You can further go ahead and either delete 
 or edit an SES template from this same table.
