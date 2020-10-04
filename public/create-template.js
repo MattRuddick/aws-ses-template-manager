@@ -1,4 +1,8 @@
 $(document).ready(function(){
+  $('#createTemplateForm').change(() => {
+    $('#createTemplateForm button').attr('disabled', false);
+  });
+
   $('#createTemplateForm').submit(function(e) {
     e.preventDefault();
     const createPayload = {

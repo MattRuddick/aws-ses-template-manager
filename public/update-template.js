@@ -14,6 +14,10 @@ $(document).ready(() => {
     $('#updateTemplateForm').removeClass('d-none'); //show the form only when we have pre-populated all inputs
   });
 
+  $('#updateTemplateForm').change(() => {
+    $('#updateTemplateForm button').attr('disabled', false);
+  });
+
 
   $('#updateTemplateForm').submit(function(e){
     e.preventDefault();
