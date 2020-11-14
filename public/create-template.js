@@ -1,4 +1,17 @@
 $(document).ready(function(){
+  const urlParams = new URLSearchParams(window.location.search);
+  window.history.replaceState({}, document.title, "/create-template");  //clean the url search params from the URL
+  if (urlParams.has('d-origin')) {
+    //we need to load the existing template from which we will duplicate
+    $.get(`/get-template/${urlParams.get('d-origin')}?region=${localStorage.getItem('region')}`, function (response) {
+      $('#templateName').val(urlParams.get('d-name'));
+      $('#templateSubject').val(response.data.SubjectPart);
+      $('#templateText').val(response.data.TextPart);
+      $('#templateHtml').val(response.data.HtmlPart);
+      $('#createTemplateForm').trigger('change'); //enable the save button
+    });
+  }
+
   $('#createTemplateForm').change(() => {
     $('#createTemplateForm button').attr('disabled', false);
   });

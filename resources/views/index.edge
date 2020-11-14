@@ -144,6 +144,31 @@
     </div>
   </div>
 
+  <!-- duplicate as modal -->
+    <div class="modal fade" id="duplicateAsModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Duplicate template</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+                <label for="templateName">Duplicating template: '<span id="template-name"></span>'</label>
+                <input type="text" class="form-control" id="newTemplateName" aria-describedby="templateNameHelp" placeholder="Enter your new template name">
+                <small id="templateNameHelp" class="form-text text-muted">This name can be changed within the next edit page if you so wish before you save your template.</small>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" data-action-name="" onclick="duplicateCtaAction($(this).attr('data-action-name'))" id="duplicateTemplateCta">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   <!-- delete template alert -->
   <div class="alert alert-success fade" style="display:none; position: absolute; bottom: 10px; left: 0; right:0; margin: auto;" role="alert">
     Template successfully deleted.
