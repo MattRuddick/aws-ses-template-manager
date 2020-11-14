@@ -86,9 +86,9 @@ function triggerDeleteConfimationModal(templateName) {
   $('#deleteConfirmationModal').modal();
 }
 
-function triggerDuplicateAsModal(templateName) {
-  $('#duplicateTemplateCta').attr('data-action-name', templateName);
-  $('#template-name').text(templateName);
+function triggerDuplicateAsModal(existingTemplateName) {
+  $('#duplicateTemplateCta').attr('data-existing-template-name', existingTemplateName);
+  $('#template-name').text(existingTemplateName); //the existing template name
   $('#duplicateAsModal').modal();
 }
 

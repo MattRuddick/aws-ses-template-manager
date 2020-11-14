@@ -1,8 +1,10 @@
 $(document).ready(function(){
+
+  // check to see if the template we're creating is a duplicate of an existing template
   const urlParams = new URLSearchParams(window.location.search);
-  window.history.replaceState({}, document.title, "/create-template");  //clean the url search params from the URL
+  window.history.replaceState({}, document.title, "/create-template");  // clean the url search params from the URL
   if (urlParams.has('d-origin')) {
-    //we need to load the existing template from which we will duplicate
+    // we need to load the existing template from which we will duplicate
     $.get(`/get-template/${urlParams.get('d-origin')}?region=${localStorage.getItem('region')}`, function (response) {
       $('#templateName').val(urlParams.get('d-name'));
       $('#templateSubject').val(response.data.SubjectPart);
@@ -12,10 +14,12 @@ $(document).ready(function(){
     });
   }
 
+  // observe any changes to the form. If so, then enable the create btn
   $('#createTemplateForm').change(() => {
     $('#createTemplateForm button').attr('disabled', false);
   });
 
+  // handle form submissions
   $('#createTemplateForm').submit(function(e) {
     e.preventDefault();
     const createPayload = {
