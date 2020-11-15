@@ -1,0 +1,10 @@
+#newVersionIndicator {
+  background: #e26262;
+  color: #313131;
+  width: 185px;
+  position: absolute;
+  top: 0;
+  left: 0px;
+  text-align: center;
+  border-radius: 0 0 5px 0;
+}

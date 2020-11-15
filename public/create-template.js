@@ -48,4 +48,6 @@ $(document).ready(function(){
       }
     });
   });
+
+  checkAppVersion();
 });

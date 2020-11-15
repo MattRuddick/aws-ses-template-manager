@@ -5,14 +5,14 @@ $(document).ready(() => {
     $('#regionSelector').val(localStorage.getItem('region')); //always ensure the select region dropdown matches localstorage region
   }
 
-  //apply region select listener
+  // apply region select listener
   $('#regionSelector').change(function(){
     const regionName = $(this).val(); //get changed to selection
     localStorage.setItem('region', regionName);
     window.location.reload();
   });
 
-  //get templates and build table
+  // get templates and build table
   $.get(`/list-templates?region=${localStorage.getItem('region')}`, function (data) {
     const templatesArr = data.items.TemplatesMetadata;
 
@@ -67,6 +67,9 @@ $(document).ready(() => {
     $('#credentialsErrorModal .modal-body').append(`<p><strong>${response.responseJSON.code}</strong> <br> ${response.responseJSON.message} </p>`);
     $('#credentialsErrorModal').modal();
   });
+
+  // check project latest version
+  checkAppVersion();
 });
 
 function deleteTemplate(templateName) {
