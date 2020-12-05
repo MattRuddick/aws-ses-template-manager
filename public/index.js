@@ -68,8 +68,6 @@ $(document).ready(() => {
     $('#credentialsErrorModal').modal();
   });
 
-  // check project latest version
-  checkAppVersion();
 });
 
 function deleteTemplate(templateName) {

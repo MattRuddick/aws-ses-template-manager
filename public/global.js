@@ -7,7 +7,7 @@ function populateTextSectionContent() {
   $('#templateText').val(textContent);
 }
 
-async function checkAppVersion(){
+(async function() {
   const versionChecked = sessionStorage.getItem('versionChecked');
   if (!versionChecked) {
     await $.get(`https://api.github.com/repos/MattRuddick/ses-template-manager/tags`, (response) => {
@@ -30,4 +30,4 @@ async function checkAppVersion(){
     const latestVersion = sessionStorage.getItem('latestVersion');
     $('body').append(`<a id="newVersionIndicator" href="https://github.com/MattRuddick/ses-template-manager/releases/tag/${latestVersion}" target="_blank">New Version Available</a>`);
   }
-}
+})();

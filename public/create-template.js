@@ -18,9 +18,6 @@ $(document).ready(function(){
       window.codeMirrorEditor.setValue(response.data.HtmlPart ? response.data.HtmlPart : "");
       $('#createTemplateForm').trigger('change'); //enable the save button
     });
-  } else {
-    const defaultSyntax = "<html>\n\t<head>\n\t</head>\n\t<body>\n\t</body>\n</html>";
-    window.codeMirrorEditor.setValue(defaultSyntax);
   }
 
   // observe any changes to the form. If so, then enable the create btn
@@ -59,5 +56,4 @@ $(document).ready(function(){
     });
   });
 
-  checkAppVersion();
 });

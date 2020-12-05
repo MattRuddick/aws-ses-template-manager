@@ -56,6 +56,5 @@ $(document).ready(() => {
     });
   });
 
-  checkAppVersion();
 });
 
