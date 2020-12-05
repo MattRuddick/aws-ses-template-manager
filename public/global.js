@@ -1,4 +1,4 @@
-const currentVersion = "v1.3";
+const currentVersion = "v1.4";
 
 function populateTextSectionContent() {
   //Will strip template html of html tags leaving inner content for the template text field
@@ -26,8 +26,10 @@ function populateTextSectionContent() {
     });
   }
 
-  if (sessionStorage.getItem('versionOutdated')) {
-    const latestVersion = sessionStorage.getItem('latestVersion');
-    $('body').append(`<a id="newVersionIndicator" href="https://github.com/MattRuddick/ses-template-manager/releases/tag/${latestVersion}" target="_blank">New Version Available</a>`);
-  }
+  $(document).ready(function() {
+    if (sessionStorage.getItem('versionOutdated')) {
+      const latestVersion = sessionStorage.getItem('latestVersion');
+      $('body').append(`<a id="newVersionIndicator" href="https://github.com/MattRuddick/ses-template-manager/releases/tag/${latestVersion}" target="_blank">New Version Available</a>`);
+    }
+  });
 })();
