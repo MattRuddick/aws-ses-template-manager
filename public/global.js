@@ -2,8 +2,8 @@ const currentVersion = "v1.3";
 
 function populateTextSectionContent() {
   //Will strip template html of html tags leaving inner content for the template text field
-  const htmlString = $('#templateHtml').val();
-  const textContent = htmlString.replace(/<[^>]*>/g, "");
+  const htmlString = window.codeMirrorEditor.getValue().trim();
+  const textContent = htmlString.replace(/<[^>]*>/g, "").replace(/\s+/g,' ').trim();
   $('#templateText').val(textContent);
 }
 

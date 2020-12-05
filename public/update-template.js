@@ -6,12 +6,20 @@ $(document).ready(() => {
     window.location.href = '/'; //something went wrong
   }
 
+  window.codeMirrorEditor = window.CodeMirror.fromTextArea(document.querySelector('#codeMirror'), {
+    mode: "htmlmixed",
+    lineNumbers: true
+  });
+
   $.get(`/get-template/${templateName}?region=${localStorage.getItem('region')}`, function (response) {
     $('#templateName').val(response.data.TemplateName);
     $('#templateSubject').val(response.data.SubjectPart);
     $('#templateText').val(response.data.TextPart);
-    $('#templateHtml').val(response.data.HtmlPart);
+
+    window.codeMirrorEditor.setValue(response.data.HtmlPart ? response.data.HtmlPart : "");
+
     $('#updateTemplateForm').removeClass('d-none'); //show the form only when we have pre-populated all inputs
+    window.codeMirrorEditor.refresh();  //must be called to re draw the code editor
   });
 
   $('#updateTemplateForm').change(() => {
@@ -23,7 +31,7 @@ $(document).ready(() => {
     e.preventDefault();
     const putPayload = {
       "TemplateName": $('#templateName').val(),
-      "HtmlPart": $('#templateHtml').val(),
+      "HtmlPart": window.codeMirrorEditor.getValue(),
       "SubjectPart": $('#templateSubject').val(),
       "TextPart": $('#templateText').val(),
       "region": localStorage.getItem('region')

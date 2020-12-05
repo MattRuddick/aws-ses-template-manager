@@ -8,3 +8,8 @@
   text-align: center;
   border-radius: 0 0 5px 0;
 }
+
+
+.CodeMirror {
+  border: 1px solid #e6e6e6;
+}

@@ -3,15 +3,24 @@ $(document).ready(function(){
   // check to see if the template we're creating is a duplicate of an existing template
   const urlParams = new URLSearchParams(window.location.search);
   window.history.replaceState({}, document.title, "/create-template");  // clean the url search params from the URL
+
+  window.codeMirrorEditor = window.CodeMirror.fromTextArea(document.querySelector('#codeMirror'), {
+    mode: "htmlmixed",
+    lineNumbers: true
+  });
+
   if (urlParams.has('d-origin')) {
     // we need to load the existing template from which we will duplicate
     $.get(`/get-template/${urlParams.get('d-origin')}?region=${localStorage.getItem('region')}`, function (response) {
       $('#templateName').val(urlParams.get('d-name'));
       $('#templateSubject').val(response.data.SubjectPart);
       $('#templateText').val(response.data.TextPart);
-      $('#templateHtml').val(response.data.HtmlPart);
+      window.codeMirrorEditor.setValue(response.data.HtmlPart ? response.data.HtmlPart : "");
       $('#createTemplateForm').trigger('change'); //enable the save button
     });
+  } else {
+    const defaultSyntax = "<html>\n\t<head>\n\t</head>\n\t<body>\n\t</body>\n</html>";
+    window.codeMirrorEditor.setValue(defaultSyntax);
   }
 
   // observe any changes to the form. If so, then enable the create btn
@@ -22,9 +31,10 @@ $(document).ready(function(){
   // handle form submissions
   $('#createTemplateForm').submit(function(e) {
     e.preventDefault();
+
     const createPayload = {
       "TemplateName": $('#templateName').val(),
-      "HtmlPart": $('#templateHtml').val(),
+      "HtmlPart": window.codeMirrorEditor.getValue(),
       "SubjectPart": $('#templateSubject').val(),
       "TextPart": $('#templateText').val(),
       "region": localStorage.getItem('region')

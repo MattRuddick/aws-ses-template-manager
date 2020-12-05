@@ -7,6 +7,16 @@
     <script src="/global.js"></script>
     <script src="/update-template.js"></script>
     <link rel="stylesheet" href="/css/global.css">
+
+    <!-- codemirror -->
+    <script src="./plugins/codemirror/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="./plugins/codemirror/lib/codemirror.css"/>
+
+    <script src="./plugins/codemirror/mode/css/css.js"></script>
+    <script src="./plugins/codemirror/mode/javascript/javascript.js"></script>
+    <script src="./plugins/codemirror/mode/xml/xml.js"></script>
+    <script src="./plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+
     <title>SES Template Manager - Update Template</title>
   </head>
 
@@ -77,7 +87,7 @@
             </div>
             <div class="form-group">
               <label for="templateHtml">Html</label>
-              <textarea class="form-control" id="templateHtml" placeholder="Html" rows="5"></textarea>
+              <textarea id="codeMirror" style="height: 300px;"></textarea>
               <small class="form-text text-muted">The HTML body of the email. This property may contain replacement tags.</small>
             </div>
             <div id="errContainer" class="text-danger mb-2 d-none"></div>
