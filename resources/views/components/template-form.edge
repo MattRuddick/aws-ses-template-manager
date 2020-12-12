@@ -1,0 +1,28 @@
+<form id="{{ id }}" class="{{ id === 'updateTemplateForm' ? 'd-none' : ''}}">
+  <div class="form-group">
+    <label for="templateName">Template Name</label>
+    <small class="form-text text-muted float-right">This value cannot be changed when editing this template</small>
+    <input type="text" class="form-control" id="templateName" placeholder="Template Name" {{ id === 'updateTemplateForm' ? 'disabled' : ''}}>
+    <small class="form-text text-muted">The name of the template. When you send the email, you refer to this name.</small>
+  </div>
+  <div class="form-group">
+    <label for="templateSubject">Subject</label>
+    <input type="text" class="form-control" id="templateSubject" placeholder="Subject" required>
+    <small class="form-text text-muted">The subject line of the email. This property may contain replacement tags.</small>
+  </div>
+  <div class="form-group">
+    <label for="templateText">Text</label>
+    <a href="javascript:;" onclick="populateTextSectionContent()" class="float-right">Generate Content</a>
+    <input type="text" class="form-control" id="templateText" placeholder="Text">
+    <small class="form-text text-muted">The text body of the email. Recipients whose email clients don't display HTML email see this version of the email. This property may contain replacement tags.</small>
+  </div>
+  <div class="form-group">
+    <label for="templateHtml">Html</label>
+    <textarea id="codeMirror"></textarea>
+    <small class="form-text text-muted">The HTML body of the email. This property may contain replacement tags.</small>
+  </div>
+  <div id="errContainer" class="text-danger mb-2 d-none"></div>
+  <a href="/" class="btn btn-secondary">Back</a>
+
+  <button type="submit" class="btn btn-primary" disabled>{{ ctaText }}</button>
+</form>
