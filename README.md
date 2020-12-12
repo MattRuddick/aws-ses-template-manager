@@ -10,9 +10,9 @@ Review templates:
 
 ![review templates screenshot](./resources/img/templates-review-screenshot.png)
 
-Create template:
+Create/Update template:
 
-![review templates screenshot](./resources/img/create-template-screenshot.png)
+![review templates screenshot](./resources/img/update-template-screenshot.png)
 
 ## Tech / framework used
 
