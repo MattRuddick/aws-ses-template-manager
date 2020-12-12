@@ -1,3 +1,7 @@
+.reviewTemplates a:hover {
+  text-decoration: none;
+}
+
 #newVersionIndicator {
   background: #e26262;
   color: #313131;
@@ -12,4 +16,6 @@
 
 .CodeMirror {
   border: 1px solid #e6e6e6;
+  resize: vertical;
+  min-height: 300px;
 }
