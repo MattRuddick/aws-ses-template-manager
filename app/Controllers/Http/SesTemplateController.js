@@ -6,6 +6,18 @@ AWS.config.credentials = credentials;
 
 class SesTemplateController {
 
+  getDynamicFields(contentStr) {
+    // a helper function which will convert a string into an array of any mustache dynamic fields
+    const matchRegex = contentStr.match(/{{\s*[\w\.]+\s*}}/g);
+    let dynamicFieldsArr = [];
+
+    if(matchRegex) {
+      dynamicFieldsArr = matchRegex.map(function(x) { return x.match(/[\w\.]+/)[0]; });
+    }
+
+    return dynamicFieldsArr;
+  }
+
   async createTemplate({request, response}) {
     const requestBody = request.post();
 
@@ -80,6 +92,19 @@ class SesTemplateController {
       });
     }).then(data => {
       response.status(200);
+
+      // get dynamic fields to return to the FE
+      const {SubjectPart, TextPart, HtmlPart} = data.Template;
+
+      // get 'SubjectPart', 'HtmlPart', 'TextPart' dynamic fields
+      let dynamicFieldsArr = [];
+      dynamicFieldsArr = [...dynamicFieldsArr, ...this.getDynamicFields(SubjectPart)]; // SubjectPart
+      dynamicFieldsArr = [...dynamicFieldsArr, ...this.getDynamicFields(TextPart)]; // TextPart
+      dynamicFieldsArr = [...dynamicFieldsArr, ...this.getDynamicFields(HtmlPart)]; // HtmlPart
+
+      dynamicFieldsArr = Array.from(new Set(dynamicFieldsArr)); // removes any dupes
+
+      data.Template['dynamicFields'] = dynamicFieldsArr;  // add the dynamicFields to the payload
       response.send({data: data.Template});
     }).catch(err => {
       response.status(500);
@@ -103,7 +128,7 @@ class SesTemplateController {
     };
 
     await new Promise((resolve, reject) => {
-      ses.updateTemplate(params, function(err, data) {
+      ses.updateTemplate(params, function (err, data) {
         if (err) {
           reject(err);
         } else {
@@ -129,19 +154,54 @@ class SesTemplateController {
       const params = {
         TemplateName: requestParams.TemplateName /* required */
       };
-      ses.deleteTemplate(params, function(err, data) {
+      ses.deleteTemplate(params, function (err, data) {
         if (err) {
           reject(err);
         } else {
           resolve();
         }
       });
-    }).then(data => {
+    }).then((data) => {
       response.send(200);
     }).catch(err => {
       response.status(500);
       response.send(err);
     });
+  }
+
+  async sendTemplate({request, response}) {
+    const requestBody = request.post();
+    const params = {
+      Destination: { /* required */
+        ToAddresses: [
+          requestBody.toAddress
+        ]
+      },
+      Source: requestBody.source, /* required */
+      Template: requestBody.templateName, /* required */
+      TemplateData: requestBody.templateData, /* required */
+    };
+
+    AWS.config.update({region: requestBody.region});
+    const ses = new AWS.SES();
+
+    await new Promise((resolve, reject) => {
+      ses.sendTemplatedEmail(params, function(err, data) {
+        if (err) {
+          // an error occurred
+          console.log(err, err.stack);
+          reject(err);
+        } else{
+          resolve(data);           // successful response
+        }
+      });
+    }).then((data) => {
+      response.send(200);
+    }).catch((err) => {
+      response.status(500);
+      response.send(err);
+    });
+
   }
 }
 

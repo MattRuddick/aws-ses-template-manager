@@ -1,12 +1,12 @@
 $(document).ready(() => {
-  if(!localStorage.getItem('region')){
+  if (!localStorage.getItem('region')) {
     localStorage.setItem('region', 'us-east-1');  //default region if none set
   } else {
     $('#regionSelector').val(localStorage.getItem('region')); //always ensure the select region dropdown matches localstorage region
   }
 
   // apply region select listener
-  $('#regionSelector').change(function(){
+  $('#regionSelector').change(function () {
     const regionName = $(this).val(); //get changed to selection
     localStorage.setItem('region', regionName);
     window.location.reload();
@@ -55,6 +55,12 @@ $(document).ready(() => {
                   </svg>
                   Duplicate
                 </a>
+                <a class="dropdown-item" type="button" href="javascript:;" onclick="triggerSendTestEmailModal('${template.Name}')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply-fill" viewBox="0 3 16 16">
+                    <path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
+                  </svg>
+                  Send test email
+                </a>
               </div>
             </div>
             </td>
@@ -75,18 +81,105 @@ function deleteTemplate(templateName) {
   $.ajax({
     url: `/delete-template/${templateName}?region=${localStorage.getItem('region')}`,
     type: 'DELETE',
-    success: function(result) {
+    success: function (result) {
       // Do something with the result
       window.location.reload();
     }
   });
 }
 
+// Email sending
+function triggerSendTestEmailModal(templateName) {
+  $('#sendTestEmailModal #sendEmailCta').attr('data-action-name', templateName);  // set the template name for later reference if form gets submitted
+  $('#sendTestEmailModal #templateName').text(templateName);  // set the template name for the sub title
+  $('#sendTestEmailModal #loadingTemplateText').show(); // set loading content back to original status
+
+  $('#sendTestEmailModal #loadingTemplateText').show(); // reset modal to initial state
+  $('#sendTestEmailModal #dynamicFieldsContainer').html(''); // reset modal to initial state
+  $('#sendTestEmailModal #errorOutput').addClass('d-none'); // reset modal to initial state
+  $('#sendTestEmailModal #confirmationText').hide();  // reset modal to initial state
+
+  $.get(`/get-template/${templateName}?region=${localStorage.getItem('region')}`, function (response) { // get the templates to display dynamic fields
+    const dynamicFieldsArr = response.data.dynamicFields;
+    if (dynamicFieldsArr.length > 0) {
+      $('#sendTestEmailModal #dynamicFieldsContainer').append(` 
+        <div class="my-3">
+          <p class="m-0">Template replacement tags</p>
+          <small>Specify any of your ${dynamicFieldsArr.length} implemented replacement tag values here:</small>
+        </div>
+      `);
+
+      for (const dynamicFieldItem of dynamicFieldsArr) {
+        // per each replacement tag, show an input row
+        $('#sendTestEmailModal #dynamicFieldsContainer').append(`
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">${dynamicFieldItem}</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control dynamicField" name="${dynamicFieldItem}" placeholder="value">
+            </div>
+          </div>
+        `);
+      }
+    } else {
+      $('#sendTestEmailModal #dynamicFieldsContainer').html('<div class="text-center text-muted">No replacement tag fields to display</div>');
+    }
+
+    $('#sendTestEmailModal #dynamicFieldsContainer').removeClass('d-none'); // display the dynamic fields now that they are loaded into the dom
+    $('#sendTestEmailModal #loadingTemplateText').hide(); // reset modal to initial state
+  });
+
+  // build dynamic form based on mustache templates
+  $('#sendTestEmailModal').modal();
+}
+
+function sendEmailSubmission(e, form){
+  // called inline onsubmit from modal form
+  e.preventDefault();
+
+  const source = form.querySelector('input#sourceAddress').value;
+  const toAddress = form.querySelector('input#toAddress').value;
+  const templateName = e.submitter.attributes['data-action-name'].value;
+
+  $('#sendTestEmailModal #sendEmailCta').attr('disabled', true);  // dont allow user to rage click the button if network is slow
+
+  const dynamicFieldsEl = form.querySelectorAll('input.dynamicField');
+  const dynamicFieldPayload = {};
+
+  if(dynamicFieldsEl.length > 0) {
+    // take into consideration dynamic fields in the payload
+    dynamicFieldsEl.forEach((el) => {
+      dynamicFieldPayload[el.name] = el.value;
+    });
+  }
+
+  $.post(`/send-template`, { templateName, source, templateData: JSON.stringify(dynamicFieldPayload), toAddress, region: localStorage.getItem('region')}, (response) => {
+    // show confirmation content
+    $('#sendTestEmailModal #errorOutput').addClass('d-none');
+    $('#sendTestEmailModal #confirmationText #sentTime').html(new Date());
+    $('#sendTestEmailModal #confirmationText').fadeIn();
+
+    window.setTimeout(() => {
+      $('#sendTestEmailModal #confirmationText').fadeOut(200);
+    },8000);
+  }).fail((err) => {
+    console.log(err);
+    let errorMessage = 'Error, please check console';
+    if(err.responseJSON && err.responseJSON.message) {
+      errorMessage = err.responseJSON.message;  // specific error message back from AWS
+    }
+    $('#sendTestEmailModal #errorOutput').text(errorMessage).removeClass('d-none');
+  }).always(() => {
+    $('#sendTestEmailModal #sendEmailCta').removeAttr('disabled'); // re-enable the send button again for future submissions
+  });
+}
+
+// template deleting
 function triggerDeleteConfimationModal(templateName) {
   $('#deleteTemplateCta').attr('data-action-name', templateName);
   $('#deleteConfirmationModal').modal();
 }
 
+// template duplicating
 function triggerDuplicateAsModal(existingTemplateName) {
   $('#duplicateTemplateCta').attr('data-existing-template-name', existingTemplateName);
   $('#template-name').text(existingTemplateName); //the existing template name
@@ -94,7 +187,7 @@ function triggerDuplicateAsModal(existingTemplateName) {
 }
 
 function duplicateCtaAction(existingTemplateName) {
-  //we need to build the link and redirect to the create template page
+  // we need to build the link and redirect to the create template page
   const newTemplateName = $('#newTemplateName').val();
   window.location.href = `/create-template?d-origin=${existingTemplateName}&d-name=${newTemplateName}`;
 }

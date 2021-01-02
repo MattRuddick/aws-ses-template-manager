@@ -114,29 +114,78 @@
   </div>
 
   <!-- duplicate as modal -->
-    <div class="modal fade" id="duplicateAsModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Duplicate template</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+  <div class="modal fade" id="duplicateAsModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Duplicate template</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="templateName">Duplicating template: '<span id="template-name"></span>'</label>
+            <input type="text" class="form-control" id="newTemplateName" aria-describedby="templateNameHelp" placeholder="Enter your new template name">
+            <small id="templateNameHelp" class="form-text text-muted">This name can be changed within the next edit page if you so wish before you save your template.</small>
           </div>
-          <div class="modal-body">
-            <div class="form-group">
-                <label for="templateName">Duplicating template: '<span id="template-name"></span>'</label>
-                <input type="text" class="form-control" id="newTemplateName" aria-describedby="templateNameHelp" placeholder="Enter your new template name">
-                <small id="templateNameHelp" class="form-text text-muted">This name can be changed within the next edit page if you so wish before you save your template.</small>
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" data-existing-template-name="" onclick="duplicateCtaAction($(this).attr('data-existing-template-name'))" id="duplicateTemplateCta">Next</button>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" data-existing-template-name="" onclick="duplicateCtaAction($(this).attr('data-existing-template-name'))" id="duplicateTemplateCta">Next</button>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- send email modal -->
+  <div class="modal fade" id="sendTestEmailModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="flex-direction: column;">
+          <h5 class="modal-title" id="exampleModalLabel">Send Test Email</h5>
+          <small class="text-muted">Send your email template "<b id="templateName"></b>" via AWS SES to a single recipient email address. (<b>for testing purposes only!</b>)</small>
+          <small class="text-danger">Any emails sent from here are liable to billing and costs through your AWS account.</small>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute; right: 15px;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form onsubmit="sendEmailSubmission(event, this)">
+          <div class="modal-body">
+            <div class="form-group">
+                <label for="templateName">Source email address</label>
+                <small class="form-text text-muted float-right">The single source (from) email address</small>
+                <input type="email" class="form-control" id="sourceAddress" placeholder="source email address" required>
+                <small class="form-text text-muted">The domain you're sending from must already be verified in AWS</small>
+            </div>
+            <div class="form-group">
+                <label for="templateName">Recipient email address</label>
+                <small class="form-text text-muted float-right">A single email address you'd like to send this template to</small>
+                <input type="email" class="form-control" id="toAddress" placeholder="recipient email address" required>
+                <small class="form-text text-muted">Must already be verified in AWS for sandbox accounts</small>
+            </div>
+            <div class="text-center text-muted" id="loadingTemplateText">Loading template...</div>
+            <div class="d-none" id="dynamicFieldsContainer">
+              <!-- dynamic content here -->
+            </div>
+            <div class="d-none text-danger" id="errorOutput">
+              <!-- dynamic content here -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div id="confirmationText" class="text-success" style="flex: auto; display:none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+              </svg>
+              Email sent: <span id="sentTime"></span>
+            </div>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="sendEmailCta">Send Email</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <!-- delete template alert -->
   <div class="alert alert-success fade" style="display:none; position: absolute; bottom: 10px; left: 0; right:0; margin: auto;" role="alert">

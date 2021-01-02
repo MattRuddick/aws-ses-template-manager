@@ -31,7 +31,9 @@ const globalMiddleware = ['Adonis/Middleware/BodyParser']
 | Route.get().middleware('auth')
 |
 */
-const namedMiddleware = {}
+const namedMiddleware = {
+  throttle: 'Adonis/Middleware/Throttle'
+}
 
 Server
   .registerGlobal(globalMiddleware)
