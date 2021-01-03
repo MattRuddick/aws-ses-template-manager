@@ -42,7 +42,7 @@ Once installation steps have been followed, navigate to http://127.0.0.1:3333 (h
 The index page will show a table of existing SES templates in your selected region using the AWS named profile specified in the .env file. You can further go ahead and either delete 
 or edit an SES template from this same table.
 
-##Updating versions
+## Updating versions
 ![newer version screenshot](./resources/img/newer-version-screenshot.png)
 
 The application will **automatically** check to see if you are using the latest release version. If you are not, then you will get 
