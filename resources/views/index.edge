@@ -53,7 +53,7 @@
 
       <div style="display:none;" id="noTemplatesPlaceholder" class="row">
         <div class="col">
-          <p>You have no templates</p>
+          <p class="text-center text-muted mt-3">No templates in this region</p>
         </div>
       </div>
 
@@ -79,17 +79,18 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Delete template '<b id="templateName"></b>'</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Deleting a SES template is a non reversible action
+          Are you sure you want to permanently delete this template?<br/>
+          <strong>Deleting an SES template cannot be undone!</strong>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" data-action-name="" onclick="deleteTemplate($(this).attr('data-action-name'))" id="deleteTemplateCta">Delete</button>
+          <button type="button" class="btn btn-danger" data-action-name="" onclick="deleteTemplate($(this).attr('data-action-name'))" id="deleteTemplateCta">Delete</button>
         </div>
       </div>
     </div>

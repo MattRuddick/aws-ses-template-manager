@@ -5,14 +5,23 @@
 #newVersionIndicator {
   background: #e26262;
   color: #313131;
-  width: 185px;
+  width: 195px;
   position: absolute;
   top: 0;
-  left: 0px;
-  text-align: center;
+  left: 0;
   border-radius: 0 0 5px 0;
+  padding: 0 10px;
 }
 
+#newVersionIndicator:hover {
+  text-decoration: initial;
+  background: #eb6161;
+}
+
+#newVersionIndicator svg {
+  top: 5px;
+  right: 6px;
+}
 
 .CodeMirror {
   border: 1px solid #e6e6e6;
