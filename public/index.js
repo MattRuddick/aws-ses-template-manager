@@ -24,10 +24,16 @@ $(document).ready(() => {
     //Build table
     let tableContent = ``;
     for (let template of templatesArr) {
+
+      // change the UTC 'created timestamp' string for better readability
+      const createdDate = template.CreatedTimestamp.slice(0, 10);
+      const createdTime = template.CreatedTimestamp.slice(11, 19);
+      const dateTimeString = `${createdDate} ${createdTime}`;
+
       tableContent += `
           <tr>
             <td scope="row">${template.Name}</td>
-            <td>${template.CreatedTimestamp}</td>
+            <td>${dateTimeString}</td>
             <td class="text-right">
             
             <a href="/update-template?name=${template.Name}" class="mr-2" data-toggle="tooltip" data-placement="top" title="Edit / view template">
