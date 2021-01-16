@@ -28,3 +28,7 @@
   resize: vertical;
   min-height: 300px;
 }
+
+.col-form-label {
+  overflow-wrap: break-word;
+}

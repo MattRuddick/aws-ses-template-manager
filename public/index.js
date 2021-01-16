@@ -114,8 +114,8 @@ function triggerSendTestEmailModal(templateName) {
         // per each replacement tag, show an input row
         $('#sendTestEmailModal #dynamicFieldsContainer').append(`
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">${dynamicFieldItem}</label>
-            <div class="col-sm-10">
+            <label class="col-sm-3 col-form-label">${dynamicFieldItem}</label>
+            <div class="col-sm-9">
               <input type="text" class="form-control dynamicField" name="${dynamicFieldItem}" placeholder="value">
             </div>
           </div>
