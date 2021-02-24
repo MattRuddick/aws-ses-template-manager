@@ -1,5 +1,7 @@
-# AWS SES Template Manager GUI
-
+# AWS SES Template Manager GUI [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2FMattRuddick%2Faws-ses-template-manager%0a%0a&text=A%20simple%20productivity%20tool%20presenting%20a%20user%20interface%20around%20the%20AWS%20SES%20command%20line%20interface.%20This%20application%20allows%20for%20quick%20and%20easy%20reviewing%2C%20creating%2C%20updating%20and%20deleting%20of%20%23AWS%20%23SES%20templates%3A&hashtags=AwsSes%2CSesTemplates%2CSesGui)
+[![Github All Releases](https://img.shields.io/github/v/release/MattRuddick/aws-ses-template-manager.svg?style=flat)](https://github.com/MattRuddick/aws-ses-template-manager/releases)
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 ## Features
 A simple productivity tool presenting a user interface around the AWS SES command line interface. This application allows 
 for **quick and easy reviewing, creating, updating and deleting of AWS SES templates** within any region.
@@ -9,6 +11,8 @@ Other useful features include:
 - Syntax highlighting for the HTML body of your emails.
 - **Send test emails** for your template including adding values for any replacement tags you may have implemented.
 - Be **notified of any newer versions** of this application to always ensure you have the latest features.
+
+See [installation instructions](#Installation) to get started.
 
 ## Motivation
 AWS currently only allows CRUD actions on SES templates via the command line. Performing these actions especially for multiple templates 
@@ -42,7 +46,7 @@ Once installation steps have been followed, navigate to http://127.0.0.1:3333 (h
 The index page will show a table of existing SES templates in your selected region using the AWS named profile specified in the .env file. You can further go ahead and either delete 
 or edit an SES template from this same table.
 
-## Updating versions
+## Staying up to date
 ![newer version screenshot](./resources/img/newer-version-screenshot.png)
 
 The application will **automatically** check to see if you are using the latest release version. If you are not, then you will get 
@@ -63,3 +67,6 @@ Pull requests are very much welcomed.
 
 ## License
 MIT @ [Matthew Ruddick](https://github.com/MattRuddick)
+
+[![HitCount](http://hits.dwyl.com/MattRuddick/aws-ses-template-manager.svg)](http://hits.dwyl.com/MattRuddick/aws-ses-template-manager)
+![GitHub all releases](https://img.shields.io/github/downloads/MattRuddick/aws-ses-template-manager/total)
