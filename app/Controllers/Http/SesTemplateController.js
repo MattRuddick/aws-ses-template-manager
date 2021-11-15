@@ -8,11 +8,12 @@ class SesTemplateController {
 
   getDynamicFields(contentStr) {
     // a helper function which will convert a string into an array of any mustache dynamic fields
-    const matchRegex = contentStr.match(/{{\s*[\w\.]+\s*}}/g);
     let dynamicFieldsArr = [];
-
-    if(matchRegex) {
-      dynamicFieldsArr = matchRegex.map(function(x) { return x.match(/[\w\.]+/)[0]; });
+    if (contentStr) {
+      const matchRegex = contentStr.match(/{{\s*[\w\.]+\s*}}/g);  // match on any mustache templates
+      if(matchRegex) {
+        dynamicFieldsArr = matchRegex.map(function(x) { return x.match(/[\w\.]+/)[0]; });
+      }
     }
 
     return dynamicFieldsArr;

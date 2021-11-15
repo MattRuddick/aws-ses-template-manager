@@ -69,4 +69,3 @@ Pull requests are very much welcomed.
 MIT @ [Matthew Ruddick](https://github.com/MattRuddick)
 
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FMattRuddick%2Faws-ses-template-manager&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)]()
-![GitHub all releases](https://img.shields.io/github/downloads/MattRuddick/aws-ses-template-manager/total)
