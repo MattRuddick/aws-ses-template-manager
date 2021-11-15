@@ -1,4 +1,4 @@
-const currentVersion = "v1.5.2";
+const currentVersion = "v1.5.3";
 
 function populateTextSectionContent() {
   //Will strip template html of html tags leaving inner content for the template text field
