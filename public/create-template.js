@@ -21,7 +21,7 @@ $(document).ready(function(){
   }
 
   // observe any changes to the form. If so, then enable the create btn
-  $('#createTemplateForm').change(() => {
+  $('#createTemplateForm').on('input', () => {
     $('#createTemplateForm button').attr('disabled', false);
   });
 
