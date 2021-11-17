@@ -1,10 +1,12 @@
-const currentVersion = "v1.5.3";
+const currentVersion = "v1.5.2";
 
 function populateTextSectionContent() {
   //Will strip template html of html tags leaving inner content for the template text field
   const htmlString = window.codeMirrorEditor.getValue().trim();
   const textContent = $(htmlString).not('style').text().replace(/\s\s+/g, ' ').trim();
-  $('#templateText').val(textContent);
+  const $templateText = $('#templateText');
+  $templateText.val(textContent);
+  $templateText.trigger('input'); // we need this event triggered to enable the update button (just as if someone was to type in this input).
 }
 
 (async function () {
