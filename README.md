@@ -48,7 +48,7 @@ docker run -p 3333:3333 \
   -e AWS_ACCESS_KEY_ID=<your-aws-access-key-id> \
   -e AWS_SECRET_ACCESS_KEY=<your-aws-secret-access-key> \
   -e AWS_REGION=<your-aws-region> \
-  ghcr.io/rayyansys/aws-ses-template-manager:latest
+  ghcr.io/MattRuddick/aws-ses-template-manager:latest
 ```
 
 You can use the `latest` version of the image or pull a specific release tag.
