@@ -3,7 +3,7 @@
 [![Github All Releases](https://img.shields.io/github/v/release/MattRuddick/aws-ses-template-manager.svg?style=flat)](https://github.com/MattRuddick/aws-ses-template-manager/releases)
 
 ## Status: Maintained
-This proof of concept application precedes [https://seslium.com](https://seslium.com). This application will still be maintained to support any bug fixes which are raised.
+This proof of concept application precedes [https://seslium.com](https://seslium.com). It is still maintained to provide fixes for any bugs which are raised.
 
 ## Features
 A simple productivity tool presenting a user interface around the AWS SES command line interface. This application allows
