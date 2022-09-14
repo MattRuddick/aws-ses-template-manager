@@ -16,7 +16,7 @@ $(document).ready(function(){
       $('#templateSubject').val(response.data.SubjectPart);
       $('#templateText').val(response.data.TextPart);
       window.codeMirrorEditor.setValue(response.data.HtmlPart ? response.data.HtmlPart : "");
-      $('#createTemplateForm').trigger('change'); //enable the save button
+      $('#saveTemplateCta').removeAttr('disabled');  // enable the save button
     });
   }
 
