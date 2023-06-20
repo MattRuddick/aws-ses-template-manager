@@ -23,7 +23,7 @@ $(document).ready(function(){
   
   $('#alwaysFullyRenderCodeEditor').on('change', (e) => {
     const newValue = e.target.checked;
-    const newViewportMargin = e.target.checked ? Infinity : window.CodeMirror.defaults.viewportMargin;
+    const newViewportMargin = newValue ? Infinity : window.CodeMirror.defaults.viewportMargin;
     window.codeMirrorEditor.setOption('viewportMargin', newViewportMargin);
   });
 
