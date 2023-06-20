@@ -6,7 +6,8 @@ $(document).ready(function(){
 
   window.codeMirrorEditor = window.CodeMirror.fromTextArea(document.querySelector('#codeMirror'), {
     mode: "htmlmixed",
-    lineNumbers: true
+    lineNumbers: true,
+    viewportMargin: Infinity
   });
 
   if (urlParams.has('d-origin')) {

@@ -8,7 +8,8 @@ $(document).ready(() => {
 
   window.codeMirrorEditor = window.CodeMirror.fromTextArea(document.querySelector('#codeMirror'), {
     mode: "htmlmixed",
-    lineNumbers: true
+    lineNumbers: true,
+    viewportMargin: Infinity
   });
 
   const setTemplatePreview = () => {
