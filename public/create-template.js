@@ -1,5 +1,3 @@
-import { setupTemplatePreviewListeners } from './template-preview-utils';
-
 $(document).ready(function(){
 
   // check to see if the template we're creating is a duplicate of an existing template
@@ -33,7 +31,24 @@ $(document).ready(function(){
     window.codeMirrorEditor.setOption('viewportMargin', newViewportMargin);
   });
 
-  setupTemplatePreviewListeners('#createTemplateForm');
+  const setTemplatePreview = () => {
+    const templateHtml = window.codeMirrorEditor.getValue();
+    $('#templatePreview').html(templateHtml);
+  };
+
+  $('#createTemplateForm').on('input', () => {
+    const showPreview = $('#templatePreviewContainer')[0].checkVisibility();
+    if (!showPreview) return;
+    setTemplatePreview();
+  });    
+
+  $('#showPreview').on('change', (e) => {
+    const newValue = e.target.checked;
+    const changeVisibility = newValue ? 'show' : 'hide';
+    $('#templatePreviewContainer')[changeVisibility]();
+    if (newValue) return setTemplatePreview();
+    $('#templatePreview').html('');
+  });
 
   // handle form submissions
   $('#createTemplateForm').submit(function(e) {

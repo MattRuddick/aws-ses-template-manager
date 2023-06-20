@@ -1,5 +1,3 @@
-import { setTemplatePreview, setupTemplatePreviewListeners } from './template-preview-utils';
-
 $(document).ready(() => {
   const urlParams = new URLSearchParams(window.location.search);
   const templateName = urlParams.get('name');
@@ -12,6 +10,11 @@ $(document).ready(() => {
     mode: "htmlmixed",
     lineNumbers: true
   });
+
+  const setTemplatePreview = () => {
+    const templateHtml = window.codeMirrorEditor.getValue();
+    $('#templatePreview').html(templateHtml);
+  };  
 
   $.get(`/get-template/${templateName}?region=${localStorage.getItem('region')}`, function (response) {
     $('#templateName').val(response.data.TemplateName);
@@ -35,7 +38,19 @@ $(document).ready(() => {
     window.codeMirrorEditor.setOption('viewportMargin', newViewportMargin);
   });
 
-  setupTemplatePreviewListeners('#updateTemplateForm');
+  $('#updateTemplateForm').on('input', () => {
+    const showPreview = $('#templatePreviewContainer')[0].checkVisibility();
+    if (!showPreview) return;
+    setTemplatePreview();
+  });    
+
+  $('#showPreview').on('change', (e) => {
+    const newValue = e.target.checked;
+    const changeVisibility = newValue ? 'show' : 'hide';
+    $('#templatePreviewContainer')[changeVisibility]();
+    if (newValue) return setTemplatePreview();
+    $('#templatePreview').html('');
+  });
 
   $('#updateTemplateForm').submit(function(e){
     e.preventDefault();
