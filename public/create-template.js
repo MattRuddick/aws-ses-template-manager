@@ -1,3 +1,5 @@
+import { setupTemplatePreviewListeners } from './template-preview-utils';
+
 $(document).ready(function(){
 
   // check to see if the template we're creating is a duplicate of an existing template
@@ -30,6 +32,8 @@ $(document).ready(function(){
     const newViewportMargin = e.target.checked ? Infinity : window.CodeMirror.defaults.viewportMargin;
     window.codeMirrorEditor.setOption('viewportMargin', newViewportMargin);
   });
+
+  setupTemplatePreviewListeners('#createTemplateForm');
 
   // handle form submissions
   $('#createTemplateForm').submit(function(e) {

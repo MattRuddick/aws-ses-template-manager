@@ -1,3 +1,5 @@
+import { setTemplatePreview, setupTemplatePreviewListeners } from './template-preview-utils';
+
 $(document).ready(() => {
   const urlParams = new URLSearchParams(window.location.search);
   const templateName = urlParams.get('name');
@@ -20,6 +22,7 @@ $(document).ready(() => {
 
     $('#updateTemplateForm').removeClass('d-none'); //show the form only when we have pre-populated all inputs
     window.codeMirrorEditor.refresh();  //must be called to re draw the code editor
+    setTemplatePreview();
   });
 
   $('#updateTemplateForm').on('input', () => {
@@ -32,6 +35,7 @@ $(document).ready(() => {
     window.codeMirrorEditor.setOption('viewportMargin', newViewportMargin);
   });
 
+  setupTemplatePreviewListeners('#updateTemplateForm');
 
   $('#updateTemplateForm').submit(function(e){
     e.preventDefault();
