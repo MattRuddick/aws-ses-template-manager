@@ -28,7 +28,9 @@ $(document).ready(() => {
     setTemplatePreview();
   });
 
-  $('#updateTemplateForm').on('input', () => {
+  $('#updateTemplateForm').on('input', (e) => {
+    const isEditorConfig = e.target.getAttribute('data-editor-config') === 'true';
+    if (isEditorConfig) return;
     $('#updateTemplateForm button').attr('disabled', false);
   });
 

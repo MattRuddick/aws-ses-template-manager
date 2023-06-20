@@ -21,7 +21,9 @@ $(document).ready(function(){
   }
 
   // observe any changes to the form. If so, then enable the create btn
-  $('#createTemplateForm').on('input', () => {
+  $('#createTemplateForm').on('input', (e) => {
+    const isEditorConfig = e.target.getAttribute('data-editor-config') === 'true';
+    if (isEditorConfig) return;
     $('#createTemplateForm button').attr('disabled', false);
   });
 
