@@ -20,30 +20,44 @@ $(document).ready(function(){
       $('#saveTemplateCta').removeAttr('disabled');  // enable the save button
     });
   }
-
-  // observe any changes to the form. If so, then enable the create btn
-  $('#createTemplateForm').on('input', (e) => {
-    const isEditorConfig = e.target.getAttribute('data-editor-config') === 'true';
-    if (isEditorConfig) return;
-    $('#createTemplateForm button').attr('disabled', false);
-  });
-
+  
   $('#alwaysFullyRenderCodeEditor').on('change', (e) => {
     const newValue = e.target.checked;
     const newViewportMargin = e.target.checked ? Infinity : window.CodeMirror.defaults.viewportMargin;
     window.codeMirrorEditor.setOption('viewportMargin', newViewportMargin);
   });
 
+  const isCodeMirrorEvent = (e) => (e.target === window.codeMirrorEditor.getInputField());
+
+  // observe any changes to the form. If so, then enable the create btn
+  $('#createTemplateForm').on('input', (e) => {
+    if (isCodeMirrorEvent(e)) return;
+    const isEditorConfig = e.target.getAttribute('data-editor-config') === 'true';
+    if (isEditorConfig) return;
+    $('#createTemplateForm button').attr('disabled', false);
+  });
+
+  // We may not get an input event on deletion from the codeMirror editor
+  window.codeMirrorEditor.on('change', () => $('#createTemplateForm button').attr('disabled', false));
+
   const setTemplatePreview = () => {
     const templateHtml = window.codeMirrorEditor.getValue();
     $('#templatePreview').html(templateHtml);
   };
 
-  $('#createTemplateForm').on('input', () => {
+  const handlePreview = () => {
     const showPreview = $('#templatePreviewContainer')[0].checkVisibility();
     if (!showPreview) return;
     setTemplatePreview();
-  });    
+  }
+
+  // We may not get an input event on deletion from the codeMirror editor
+  $('#createTemplateForm').on('input', (e) => {
+    if (isCodeMirrorEvent(e)) return;
+    handlePreview();
+  });
+
+  window.codeMirrorEditor.on('change', handlePreview);
 
   $('#showPreview').on('change', (e) => {
     const newValue = e.target.checked;
