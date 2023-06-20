@@ -26,6 +26,12 @@ $(document).ready(() => {
     $('#updateTemplateForm button').attr('disabled', false);
   });
 
+  $('#alwaysFullyRenderCodeEditor').on('change', (e) => {
+    const newValue = e.target.checked;
+    const newViewportMargin = newValue ? Infinity : window.CodeMirror.defaults.viewportMargin;
+    window.codeMirrorEditor.setOption('viewportMargin', newViewportMargin);
+  });
+
 
   $('#updateTemplateForm').submit(function(e){
     e.preventDefault();

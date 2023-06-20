@@ -23,6 +23,11 @@
   </div>
   <div id="errContainer" class="text-danger mb-2 d-none"></div>
   <a href="/" class="btn btn-secondary">Back</a>
+  <div class="form-group">
+    <label for="alwaysFullyRenderCodeEditor">Render all Html in the editor and not just what is visible</label>
+    <input type="checkbox" id="alwaysFullyRenderCodeEditor">
+    <small class="form-text text-muted">This makes the editor contents fully searchable but performance may be degraded for large documents.</small>
+  </div>
 
   <button type="submit" class="btn btn-primary" id="saveTemplateCta" disabled>{{ ctaText }}</button>
 </form>
