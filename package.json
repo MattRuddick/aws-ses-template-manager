@@ -13,6 +13,12 @@
     "adonis-app"
   ],
   "author": "https://github.com/MattRuddick",
+  "contributors": [
+    {
+      "name": "Jay Simons",
+      "url": "https://jay.designly.biz"
+    }
+  ],
   "license": "MIT",
   "private": true,
   "dependencies": {
