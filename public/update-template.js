@@ -1,9 +1,20 @@
 const parseContent = (content) => {
+  console.log(content);
   if (!content) return "";
   // Parse unicode escaped characters
-  return decodeURIComponent(
-    JSON.parse(`"${content.replace(/"/g, '\\"').replace(/(?:\r\n|\r|\n)/g, '\\n')}"`)
-  );
+  let retVal = content.replace(/"/g, '\\"').replace(/(?:\r\n|\r|\n)/g, '\\n');
+  retVal = retVal.replace(/\\u([\d\w]{4})/gi, function (match, grp) {
+    return String.fromCharCode(parseInt(grp, 16));
+  });
+  retVal = retVal.replace(/\\n/g, '\n');
+  retVal = retVal.replace(/\\t/g, '\t');
+  retVal = retVal.replace(/\\r/g, '\r');
+  retVal = retVal.replace(/\\b/g, '\b');
+  retVal = retVal.replace(/\\f/g, '\f');
+  retVal = retVal.replace(/\\'/g, '\'');
+  retVal = retVal.replace(/\\"/g, '\"');
+  retVal = retVal.replace(/\\\\/g, '\\');
+  return retVal;
 };
 
 $(document).ready(() => {
