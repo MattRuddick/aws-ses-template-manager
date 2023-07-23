@@ -1,3 +1,22 @@
+const parseContent = (content) => {
+  console.log(content);
+  if (!content) return "";
+  // Parse unicode escaped characters
+  let retVal = content.replace(/"/g, '\\"').replace(/(?:\r\n|\r|\n)/g, '\\n');
+  retVal = retVal.replace(/\\u([\d\w]{4})/gi, function (match, grp) {
+    return String.fromCharCode(parseInt(grp, 16));
+  });
+  retVal = retVal.replace(/\\n/g, '\n');
+  retVal = retVal.replace(/\\t/g, '\t');
+  retVal = retVal.replace(/\\r/g, '\r');
+  retVal = retVal.replace(/\\b/g, '\b');
+  retVal = retVal.replace(/\\f/g, '\f');
+  retVal = retVal.replace(/\\'/g, '\'');
+  retVal = retVal.replace(/\\"/g, '\"');
+  retVal = retVal.replace(/\\\\/g, '\\');
+  return retVal;
+};
+
 $(document).ready(() => {
   const urlParams = new URLSearchParams(window.location.search);
   const templateName = urlParams.get('name');
@@ -13,10 +32,13 @@ $(document).ready(() => {
 
   $.get(`/get-template/${templateName}?region=${localStorage.getItem('region')}`, function (response) {
     $('#templateName').val(response.data.TemplateName);
-    $('#templateSubject').val(response.data.SubjectPart);
-    $('#templateText').val(response.data.TextPart);
+    const subjectParsed = parseContent(response.data.SubjectPart);
+    $('#templateSubject').val(subjectParsed);
+    const textParsed = parseContent(response.data.TextPart);
+    $('#templateText').val(textParsed);
 
-    window.codeMirrorEditor.setValue(response.data.HtmlPart ? response.data.HtmlPart : "");
+    const htmlParsed = parseContent(response.data.HtmlPart);
+    window.codeMirrorEditor.setValue(htmlParsed);
 
     $('#updateTemplateForm').removeClass('d-none'); //show the form only when we have pre-populated all inputs
     window.codeMirrorEditor.refresh();  //must be called to re draw the code editor
@@ -27,7 +49,7 @@ $(document).ready(() => {
   });
 
 
-  $('#updateTemplateForm').submit(function(e){
+  $('#updateTemplateForm').submit(function (e) {
     e.preventDefault();
     const putPayload = {
       "TemplateName": $('#templateName').val(),
@@ -41,10 +63,10 @@ $(document).ready(() => {
       url: `/update-template`,
       type: 'PUT',
       data: putPayload,
-      success: function() {
+      success: function () {
         window.location.href = '/';
       },
-      error: function(xhr) {
+      error: function (xhr) {
         let content;
         if (xhr.responseJSON.message) {
           content = xhr.responseJSON.message;
