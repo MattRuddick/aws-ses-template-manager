@@ -43,6 +43,21 @@ Create/Update template:
 - Ensure 'AWS_PROFILE_NAME' within the **.env file** is set to your desired aws named profile. Also ensure for the named profile chosen that all applicable permissions are granted to allow for creating, retrieving, updating, deleting and sending SES templates.
 - ```adonis serve --dev``` will run the application.
 
+### Docker installation
+
+Run the following command to run the docker image:
+
+```bash
+docker run -p 3333:3333 \
+  -e AWS_ACCESS_KEY_ID=<your-aws-access-key-id> \
+  -e AWS_SECRET_ACCESS_KEY=<your-aws-secret-access-key> \
+  -e AWS_REGION=<your-aws-region> \
+  ghcr.io/MattRuddick/aws-ses-template-manager:latest
+```
+
+You can use the `latest` version of the image or pull a specific release tag.
+Browse tags from the packages section on the right.
+
 ## How to use
 Once installation steps have been followed, navigate to http://127.0.0.1:3333 (host and port can be changed via the .env file if required).
 
