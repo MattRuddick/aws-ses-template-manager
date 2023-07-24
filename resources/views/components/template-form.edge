@@ -17,12 +17,27 @@
     <small class="form-text text-muted">The text body of the email. Recipients whose email clients don't display HTML email see this version of the email. This property may contain replacement tags.</small>
   </div>
   <div class="form-group">
-    <label for="templateHtml">Html</label>
+    <label for="codeMirror">Html</label>
     <textarea id="codeMirror"></textarea>
     <small class="form-text text-muted">The HTML body of the email. This property may contain replacement tags.</small>
   </div>
-  <div id="errContainer" class="text-danger mb-2 d-none"></div>
-  <a href="/" class="btn btn-secondary">Back</a>
+  <div class="form-group">
+    <label for="alwaysFullyRenderCodeEditor">Enable the Html editor to be fully searchable</label>
+    <input type="checkbox" id="alwaysFullyRenderCodeEditor" checked data-editor-config=true>
+    <small class="form-text text-muted">Editor performance may be degraded for large documents when this option is selected.</small>
+  </div>
+  <div class="form-group">
+    <label for="showPreview">Display preview</label>
+    <input type="checkbox" id="showPreview" checked data-editor-config=true>
+  </div>
+  <div class="form-group">
+    <div id="errContainer" class="text-danger mb-2 d-none"></div>
+    <a href="/" class="btn btn-secondary">Back</a>
+    <button type="submit" class="btn btn-primary" id="saveTemplateCta" disabled>{{ ctaText }}</button>
+  </div>
 
-  <button type="submit" class="btn btn-primary" id="saveTemplateCta" disabled>{{ ctaText }}</button>
+  <div class="form-group" id="templatePreviewContainer">
+    <label for="templatePreview">Template Preview</label>
+    <div id=templatePreview></div>
+  </div>
 </form>
