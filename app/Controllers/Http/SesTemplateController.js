@@ -1,8 +1,10 @@
 'use strict'
 const Env = use('Env');
 const AWS = require('aws-sdk');
-const credentials = new AWS.SharedIniFileCredentials({profile: Env.get('AWS_PROFILE_NAME', 'default')});
-AWS.config.credentials = credentials;
+if (!(Env.get('AWS_ACCESS_KEY_ID') && Env.get('AWS_SECRET_ACCESS_KEY'))) {
+  const credentials = new AWS.SharedIniFileCredentials({profile: Env.get('AWS_PROFILE_NAME', 'default')});
+  AWS.config.credentials = credentials;
+}
 
 class SesTemplateController {
 
