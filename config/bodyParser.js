@@ -76,7 +76,8 @@ module.exports = {
   form: {
     types: [
       'application/x-www-form-urlencoded'
-    ]
+    ],
+    limit: '10mb'
   },
 
   /*
