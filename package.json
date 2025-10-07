@@ -1,30 +1,37 @@
 {
   "name": "aws-ses-template-manager",
-  "version": "4.1.0",
-  "adonis-version": "4.1.0",
-  "description": "GUI wrapper around AWS SES SDK",
-  "main": "index.js",
+  "version": "5.0.0",
+  "description": "Modern GUI wrapper around AWS SES SDK",
+  "main": "server/index.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "node ace test"
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "server:dev": "nodemon server/index.js",
+    "client:dev": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "start": "node server/index.js",
+    "install:all": "npm install && cd client && npm install"
   },
   "keywords": [
-    "adonisjs",
-    "adonis-app"
+    "aws",
+    "ses",
+    "email",
+    "template",
+    "react",
+    "nodejs"
   ],
   "author": "https://github.com/MattRuddick",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@adonisjs/ace": "^5.0.8",
-    "@adonisjs/bodyparser": "^2.0.9",
-    "@adonisjs/fold": "^4.0.9",
-    "@adonisjs/framework": "^5.0.9",
-    "@adonisjs/ignitor": "^2.0.8",
-    "adonis-throttle": "^2.3.6",
-    "aws-sdk": "^2.742.0"
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5",
+    "@aws-sdk/client-ses": "^3.478.0",
+    "dotenv": "^16.3.1"
   },
-  "autoload": {
-    "App": "./app"
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "concurrently": "^8.2.2"
   }
 }

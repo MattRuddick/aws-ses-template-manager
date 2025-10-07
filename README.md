@@ -1,70 +1,131 @@
-# AWS SES Template Manager GUI
-[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2FMattRuddick%2Faws-ses-template-manager%0a%0a&text=A%20simple%20productivity%20tool%20presenting%20a%20user%20interface%20around%20the%20AWS%20SES%20command%20line%20interface.%20This%20application%20allows%20for%20quick%20and%20easy%20reviewing%2C%20creating%2C%20updating%20and%20deleting%20of%20%23AWS%20%23SES%20templates%3A&hashtags=AwsSes%2CSesTemplates%2CSesGui)
-[![Github All Releases](https://img.shields.io/github/v/release/MattRuddick/aws-ses-template-manager.svg?style=flat)](https://github.com/MattRuddick/aws-ses-template-manager/releases)
+# AWS SES Template Manager
 
-## Status: Maintained
-This proof of concept application precedes [https://seslium.com](https://seslium.com). It is still maintained to provide fixes for any bugs which are raised.
+A modern, React-based GUI wrapper around AWS SES SDK for creating, managing, and testing email templates.
 
 ## Features
-A simple productivity tool presenting a user interface around the AWS SES command line interface. This application allows
-for **quick and easy reviewing, creating, updating and deleting of AWS SES templates** within any region.
 
-Other useful features include:
-- SES template **duplication**.
-- Syntax highlighting for the HTML body of your emails.
-- **Send test emails** for your template including adding values for any replacement tags you may have implemented.
-- Be **notified of any newer versions** of this application to always ensure you have the latest features.
+- **Template Management**: Create, read, update, and delete AWS SES email templates
+- **Modern UI**: Built with React, TypeScript, and Tailwind CSS
+- **Code Editor**: Syntax-highlighted HTML editor with CodeMirror
+- **Template Preview**: Live preview of HTML templates
+- **Test Emails**: Send test emails with dynamic field replacement
+- **Template Duplication**: Duplicate existing templates with new names
+- **Multi-Region Support**: Switch between AWS regions
+- **Responsive Design**: Works on desktop and mobile devices
 
-See [installation instructions](#Installation) to get started.
+## Tech Stack
 
-## Motivation
-AWS currently only allows CRUD actions on SES templates via the command line. Performing these actions especially for multiple templates
-can be time consuming and in some cases inefficient depending the volumes of templates you're managing. A simple GUI application
-allowing the user to quickly perform these actions without need to run multiple CLI commands can be more efficient in some cases.
+### Backend
+- Node.js with Express.js
+- AWS SDK v2
+- Express Rate Limiting
+- Helmet for security
+- CORS support
 
-## Screenshots
-Review templates per region:
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- Lucide React for icons
+- CodeMirror for code editing
+- React Router for navigation
+- React Hot Toast for notifications
+- Axios for API calls
 
-![review templates screenshot](./resources/img/templates-review-screenshot.png)
+## Prerequisites
 
-Create/Update template:
-
-![review templates screenshot](./resources/img/update-template-screenshot.png)
-
-## Tech / framework used
-
-- AdonisJS
-- Bootstrap 4
+- Node.js 18+ 
+- npm or yarn
+- AWS account with SES access
+- AWS credentials configured
 
 ## Installation
-- Ensure to have [setup your AWS credentials](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html) on your machine.
-- git clone this project repo.
-- ```npm install```
-- Ensure 'AWS_PROFILE_NAME' within the **.env file** is set to your desired aws named profile. Also ensure for the named profile chosen that all applicable permissions are granted to allow for creating, retrieving, updating, deleting and sending SES templates.
-- ```adonis serve --dev``` will run the application.
 
-## How to use
-Once installation steps have been followed, navigate to http://127.0.0.1:3333 (host and port can be changed via the .env file if required).
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd aws-ses-template-manager
+   ```
 
-The index page will show a table of existing SES templates in your selected region using the AWS named profile specified in the .env file. You can further go ahead and either delete
-or edit an SES template from this same table.
+2. **Install dependencies**
+   ```bash
+   npm run install:all
+   ```
 
-## Staying up to date
-![newer version screenshot](./resources/img/newer-version-screenshot.png)
+3. **Configure environment**
+   ```bash
+   cp env.example .env
+   ```
+   
+   Edit `.env` with your AWS credentials:
+   ```
+   PORT=3000
+   NODE_ENV=development
+   AWS_ACCESS_KEY_ID=your-aws-access-key-id
+   AWS_SECRET_ACCESS_KEY=your-aws-secret-access-key
+   AWS_DEFAULT_REGION=us-east-1
+   ```
 
-The application will **automatically** check to see if you are using the latest release version. If you are not, then you will get
-a visual prompt to let you know there is a newer version of the app available (as shown above in the top left). This is a great way to stay
-up to date with new features etc.
+4. **Build the frontend**
+   ```bash
+   npm run build
+   ```
 
-You can easily get the latest changes by:
-- running the command: ```git pull```
-- stop and restarting adonis (```adonis serve --dev```)
-- closing and re-opening your local browser tab
+## Development
 
-You can click on the 'new version available' button to access the newer versions release notes.
-Some updates may include additional dependencies. In which case ```npm install``` is advised in the release notes.
+To run in development mode with hot reloading:
+
+```bash
+npm run dev
+```
+
+This will start:
+- Backend server on http://localhost:3000
+- Frontend dev server on http://localhost:5173
+
+## Production
+
+To run in production:
+
+```bash
+npm start
+```
+
+## Usage
+
+1. **Access the application** at http://localhost:3000
+2. **Select your AWS region** from the dropdown
+3. **Create templates** with HTML, text, and subject content
+4. **Edit existing templates** by clicking the edit icon
+5. **Send test emails** using the "Send test email" option
+6. **Duplicate templates** for quick template creation
+7. **Delete templates** when no longer needed
+
+## API Endpoints
+
+- `GET /api/list-templates` - List all templates
+- `GET /api/get-template/:name` - Get specific template
+- `POST /api/create-template` - Create new template
+- `PUT /api/update-template` - Update existing template
+- `DELETE /api/delete-template/:name` - Delete template
+- `POST /api/send-template` - Send test email
+
+## Security Features
+
+- Rate limiting on API endpoints
+- Special rate limiting for email sending (30 emails per 15 minutes)
+- Helmet.js for security headers
+- CORS protection
+- Input validation and sanitization
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
 ## License
-[Modified MIT](./LICENSE) @ [Matthew Ruddick](https://github.com/MattRuddick)
 
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FMattRuddick%2Faws-ses-template-manager&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)]()
+MIT License - see LICENSE file for details
